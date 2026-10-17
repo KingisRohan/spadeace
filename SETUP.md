@@ -88,7 +88,7 @@ Some words first:
 | Timestamp (IST) | When they submitted, in Indian time |
 | Name, Business Name, WhatsApp, Email | Their details. WhatsApp is saved like `+919876543210` so you can paste it straight into WhatsApp |
 | Revenue, Business Type, Spends on Marketing, Monthly Spend, Bottleneck, Partner Preference | Their answers, in the exact words they tapped. Monthly Spend is blank when they do not spend |
-| **Lead Tag** | One per person. **NOT_FIT**: they only need posts or designs made (no calendar was shown). **PRIORITY**: monthly revenue ₹20L or more, spends on marketing, and open to fee plus performance share or to equity or revenue share. **EARLY**: revenue under ₹5L. **STANDARD**: everyone else |
+| **Lead Tag** | One per person. **NOT_FIT**: they only need posts or designs made (no calendar was shown). **PRIORITY**: monthly revenue ₹20L or more, spends on marketing, and open to a fee plus performance share or to a revenue share. **EARLY**: revenue under ₹5L. **STANDARD**: everyone else |
 | **Awareness Level** | **LOW**: spends nothing on marketing yet. **MEDIUM**: spends under ₹25K a month. **HIGH**: spends ₹25K or more a month |
 | Booked Call | Blank. You fill it in |
 

@@ -483,7 +483,7 @@ svg { display: block; }
         <li class="step">
           <span class="n" aria-hidden="true">3</span>
           <h3 class="t3">Align incentives.</h3>
-          <p class="body">The deal fits the business: a fixed fee, a fee plus performance share, or equity. Once results are proven, we would rather hold a <span class="hi">stake</span> than bill you forever.</p>
+          <p class="body">The deal fits the business: a fixed fee, or a fee plus a <span class="hi">share of the results</span>. Where it makes sense, we tie our reward to your growth, not to our hours.</p>
         </li>
       </ol>
     </div>
@@ -600,7 +600,7 @@ svg { display: block; }
     partner: [
       opt('fixed', 'Fixed monthly fee'),
       opt('perf', 'Fee plus performance share'),
-      opt('equity', 'Open to equity or revenue share'),
+      opt('share', 'Open to a revenue share'),
       opt('unsure', 'Not sure yet'),
     ],
   };
@@ -612,7 +612,7 @@ svg { display: block; }
   function leadTag(a) {
     if (a.bottleneck === 'posts') return 'NOT_FIT';
     const revenueIs20LOrMore = a.revenue === 'rev3' || a.revenue === 'rev4';
-    const openToShare = a.partner === 'perf' || a.partner === 'equity';
+    const openToShare = a.partner === 'perf' || a.partner === 'share';
     if (revenueIs20LOrMore && a.spends === 'yes' && openToShare) return 'PRIORITY';
     if (a.revenue === 'rev1') return 'EARLY';
     return 'STANDARD';
