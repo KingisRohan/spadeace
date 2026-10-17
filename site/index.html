@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+
+<script>
+/* ==================================================================
+   YOUR THREE SETTINGS. These are the only lines you ever need to edit.
+   Replace the text inside the quotes and keep the quotes.
+   While a setting still shows its [BRACKETS], the page shows a yellow
+   "setup" bar at the top. The bar disappears once all three are filled.
+   ================================================================== */
+window.SPADE_ACE_SETTINGS = {
+  // 1. The long web address Google gives you after you deploy the Apps Script.
+  sheetUrl: '[SHEET_WEBAPP_URL]',
+
+  // 2. Your Cal.com booking link. Either form works: rohan/30min or https://cal.com/rohan/30min
+  calLink: '[CAL_LINK]',
+
+  // 3. The WhatsApp number (with country code) or email shown in the footer.
+  contact: '[CONTACT_WHATSAPP_OR_EMAIL]'
+};
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spade Ace: growth consultancy for owner-run businesses in India</title>
+<meta name="description" content="Spade Ace is a growth consultancy in India. We build your growth system and take a stake in the outcome, not just an invoice.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spade Ace: growth consultancy">
+<meta property="og:description" content="We build your growth system and take a stake in the outcome, not just an invoice.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%27-1%20-1%20102%20114%27%3E%3Cpath%20fill%3D%27%23FFC800%27%20d%3D%27M50%200C50%200%209%2029%203.5%2061C-.5%2083%2012%2094%2026.5%2094C35.5%2094%2042.5%2090.5%2046.8%2085C46.8%2096%2042.5%20104.5%2032%20111L68%20111C57.5%20104.5%2053.2%2096%2053.2%2085C57.5%2090.5%2064.5%2094%2073.5%2094C88%2094%20100.5%2083%2096.5%2061C91%2029%2050%200%2050%200Z%27%2F%3E%3C%2Fsvg%3E">
+
+<!-- Fonts: Archivo (all text) and a tiny Libre Bodoni subset (card numbers only). Both from Google Fonts. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;text=%20%21%22%23%24%25%26%27%28%29%2A%2B%2C-.%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E_%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D~%E2%82%B9%E2%80%98%E2%80%99%E2%80%9C%E2%80%9D%E2%80%A6%C2%B7&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@700&amp;text=A123456&amp;display=swap">
+
+<style>
+/* ---------- Tokens ---------- */
+:root {
+  --ink: #0a0a0a;          /* page */
+  --paper: #efebe1;        /* card stock, and text on black */
+  --smoke: #9a978e;        /* quiet text on black */
+  --line: #272624;         /* hairlines on black */
+  --signal: #ffc800;       /* the one accent */
+  --card-smoke: #5e5b53;   /* quiet text on the card */
+  --card-line: rgba(10, 10, 10, .2);
+  --gutter: clamp(20px, 5.6vw, 56px);
+  --max: 70rem;
+  --r-card: 20px;
+  --r-ctl: 12px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --sans: "Archivo", "Helvetica Neue", Arial, "Noto Sans", system-ui, sans-serif;
+  --card-serif: "Libre Bodoni", "Bodoni 72", Didot, Georgia, "Times New Roman", serif;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  background: var(--ink);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  font-stretch: 100%;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+a { color: inherit; }
+button, input { font: inherit; color: inherit; }
+svg { display: block; }
+[hidden] { display: none !important; }
+::selection { background: var(--signal); color: var(--ink); }
+:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+.wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ---------- Type ---------- */
+.label {
+  font-size: .75rem;
+  font-weight: 700;
+  font-stretch: 106%;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--smoke);
+  text-wrap: balance;
+}
+.h1 {
+  font-size: clamp(3.4rem, 18vw, 7.4rem);
+  font-weight: 900;
+  font-stretch: 62%;
+  line-height: .96;
+  letter-spacing: -.005em;
+}
+.h1 span { display: block; text-wrap: balance; }
+.h2 {
+  font-size: clamp(2.6rem, 9.2vw, 4.8rem);
+  font-weight: 850;
+  font-stretch: 64%;
+  line-height: .99;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+}
+.t3 {
+  font-size: clamp(1.9rem, 6.8vw, 2.6rem);
+  font-weight: 800;
+  font-stretch: 68%;
+  line-height: 1;
+  text-wrap: balance;
+}
+.lede {
+  font-size: clamp(1.25rem, 4.9vw, 1.75rem);
+  font-weight: 450;
+  line-height: 1.35;
+  max-width: 26em;
+  text-wrap: balance;
+}
+.body { color: var(--smoke); max-width: 34em; text-wrap: pretty; }
+.fine { font-size: .875rem; color: var(--smoke); line-height: 1.45; text-wrap: pretty; }
+.hi { color: var(--signal); }
+
+/* ---------- Spade + card index ---------- */
+.spade { width: 1em; height: 1.12em; fill: currentColor; }
+.index {
+  display: inline-grid;
+  justify-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+.index .rank {
+  font-family: var(--card-serif);
+  font-weight: 700;
+  font-size: 2.1rem;
+  line-height: .9;
+  font-variant-numeric: lining-nums;
+}
+.index .spade { font-size: 15px; }
+.flip { transform: rotate(180deg); }
+
+/* ---------- Setup bar (only visible while a setting still has [BRACKETS]) ---------- */
+.setup {
+  background: var(--signal);
+  color: var(--ink);
+  font-size: .8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  padding: 9px var(--gutter);
+}
+
+/* ---------- Header ---------- */
+.top { padding-block: 22px 8px; }
+.brand { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
+.brand .index { color: var(--paper); }
+.brand .index .spade { color: var(--signal); }
+.wordmark { font-size: 1.3rem; font-weight: 800; font-stretch: 78%; letter-spacing: .01em; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: var(--r-ctl);
+  background: var(--signal);
+  color: var(--ink);
+  font-size: 1.125rem;
+  font-weight: 800;
+  font-stretch: 88%;
+  letter-spacing: .005em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .12s var(--ease), background-color .15s;
+}
+.btn:active { transform: scale(.98); }
+.btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s var(--ease); }
+@media (hover: hover) {
+  .btn:hover { background: #ffd84a; }
+  .btn:hover svg { transform: translateY(3px); }
+}
+.btn--ink { background: var(--ink); color: var(--paper); }
+@media (hover: hover) { .btn--ink:hover { background: #1f1e1c; } }
+.btn--block { width: 100%; }
+
+/* ---------- Hero ---------- */
+.hero { padding-block: clamp(36px, 8vw, 96px) clamp(80px, 13vw, 160px); }
+.hero > * + * { margin-top: clamp(20px, 3.4vw, 28px); }
+.hero .label { margin-bottom: clamp(6px, 1.6vw, 14px); }
+.hero .h1 .hi { display: block; }
+.hero .lede { margin-top: clamp(30px, 5vw, 44px); }
+.hero .btn { width: 100%; margin-top: clamp(32px, 5vw, 44px); }
+.hero .fine { max-width: 24em; margin-top: 16px; }
+@media (min-width: 560px) { .hero .btn { width: auto; } }
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.hero > * { animation: rise .7s var(--ease) both; }
+.hero > :nth-child(2) { animation-delay: .06s; }
+.hero > :nth-child(3) { animation-delay: .16s; }
+.hero > :nth-child(4) { animation-delay: .24s; }
+.hero > :nth-child(5) { animation-delay: .3s; }
+
+/* ---------- Sections ---------- */
+/* Nothing may push the page sideways on a phone (the card slides in from the right). */
+.hero, .sec, .foot { overflow-x: hidden; overflow-x: clip; }
+.sec { border-top: 1px solid var(--line); padding-block: clamp(72px, 12vw, 148px); }
+.sec .h2 + * { margin-top: clamp(36px, 6vw, 64px); }
+
+/* Problem: three hairline rows */
+.row { display: grid; gap: 10px; padding-block: 28px; border-top: 1px solid var(--line); }
+.row:last-child { border-bottom: 1px solid var(--line); }
+.row .body { max-width: 30em; }
+@media (min-width: 860px) {
+  .row { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: baseline; padding-block: 40px; }
+}
+
+/* How we work: three steps */
+.step { display: grid; grid-template-columns: 3.4rem 1fr; gap: 6px 14px; padding-block: 28px; border-top: 1px solid var(--line); }
+.step:last-child { border-bottom: 1px solid var(--line); }
+.step .n { grid-row: span 2; font-size: 3.6rem; font-weight: 900; font-stretch: 62%; line-height: .8; color: var(--smoke); }
+.step .body { max-width: 32em; }
+@media (min-width: 860px) {
+  .step { grid-template-columns: 6rem minmax(0, 5fr) minmax(0, 6fr); gap: 0 48px; align-items: baseline; padding-block: 40px; }
+  .step .n { grid-row: auto; font-size: 4.4rem; }
+}
+
+/* Proof: two engagements */
+.proofs { display: grid; gap: 52px; }
+.proof { border-top: 1px solid var(--line); padding-top: 22px; display: grid; gap: 14px; align-content: start; }
+.proof .t3 { margin-top: 2px; }
+.proof .body { max-width: 28em; }
+.proof-note { margin-top: clamp(32px, 5vw, 48px); }
+@media (min-width: 860px) { .proofs { grid-template-columns: 1fr 1fr; gap: 64px; } }
+
+/* Not for */
+.nots { display: grid; gap: clamp(20px, 3.4vw, 32px); }
+.nots li {
+  font-size: clamp(2rem, 8.4vw, 4.1rem);
+  font-weight: 800;
+  font-stretch: 66%;
+  line-height: 1;
+  text-wrap: balance;
+  max-width: 17em;
+}
+.nots .no { color: var(--signal); }
+
+/* Fit check */
+.fit-grid { display: grid; gap: 40px; }
+.fit-intro .body { margin-top: 22px; }
+.fit-main { min-width: 0; }
+@media (min-width: 900px) {
+  .fit-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 72px; align-items: start; }
+  .fit-intro { position: sticky; top: 40px; }
+}
+
+/* ---------- The card ---------- */
+.deck { scroll-margin-top: 14px; }
+.card {
+  position: relative;
+  max-width: 34rem;
+  padding: 20px 20px 22px;
+  border-radius: var(--r-card);
+  background: var(--paper);
+  color: var(--ink);
+  color-scheme: light;
+}
+.card :focus-visible { outline-color: var(--ink); }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; min-height: 58px; }
+.card .index .spade { font-size: 15px; }
+.pips { display: flex; gap: 6px; align-items: center; padding-top: 4px; }
+.pip { width: 13px; height: 15px; fill: var(--ink); }
+.pip.off { opacity: .2; }
+.q { margin-top: 22px; font-size: clamp(1.95rem, 7.8vw, 2.45rem); font-weight: 800; font-stretch: 68%; line-height: 1; text-wrap: balance; }
+.q:focus { outline: none; }
+.hint { margin-top: 8px; font-size: .9375rem; color: var(--card-smoke); }
+
+.opts { display: grid; gap: 8px; margin-top: 22px; }
+.opts.two { grid-template-columns: 1fr 1fr; }
+.opt {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--card-line);
+  border-radius: var(--r-ctl);
+  background: transparent;
+  color: var(--ink);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s, transform .1s;
+}
+.opt .tick { flex: none; width: 13px; height: 15px; opacity: 0; transform: scale(.5); transition: opacity .15s, transform .25s var(--ease); fill: var(--ink); }
+.opt:active { transform: scale(.985); }
+.opt[aria-pressed="true"] { background: var(--signal); border-color: var(--ink); }
+.opt[aria-pressed="true"] .tick { opacity: 1; transform: none; }
+@media (hover: hover) { .opt:hover { border-color: var(--ink); } }
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 12px 0 -10px -6px;
+  padding: 0 6px;
+  border: 0;
+  background: none;
+  color: var(--card-smoke);
+  font-size: .9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+@media (hover: hover) { .back:hover { color: var(--ink); } }
+
+/* Contact fields */
+.contact { margin-top: 6px; }
+.field { display: grid; gap: 6px; margin-top: 16px; }
+.field label { font-size: .8125rem; font-weight: 700; letter-spacing: .03em; color: var(--card-smoke); }
+.field input {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 14px;
+  border: 1.5px solid var(--card-line);
+  border-radius: var(--r-ctl);
+  background: rgba(255, 255, 255, .5);
+  color: var(--ink);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field input::placeholder { color: #6b6861; font-weight: 400; opacity: 1; }
+.field input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px var(--signal); }
+.field input[aria-invalid="true"] { border-color: var(--ink); border-width: 2px; }
+.err {
+  justify-self: start;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--signal);
+  color: var(--ink);
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.contact .btn { margin-top: 22px; }
+.contact .fine { margin-top: 12px; color: var(--card-smoke); text-align: center; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Result cards */
+.card--result .card-top { align-items: center; }
+.big-spade { width: 64px; height: 72px; fill: var(--ink); }
+.card--result .t3 { margin-top: 20px; }
+.card--result .t3 + p { margin-top: 14px; color: var(--card-smoke); }
+.card--result p + p { margin-top: 12px; }
+.card--result a { font-weight: 700; }
+
+/* Card entrance */
+@keyframes deal { from { opacity: 0; transform: translateX(20px) rotate(1deg); } to { opacity: 1; transform: none; } }
+@keyframes deal-back { from { opacity: 0; transform: translateX(-20px) rotate(-1deg); } to { opacity: 1; transform: none; } }
+.deal { animation: deal .32s var(--ease) both; }
+.deal.from-left { animation-name: deal-back; }
+
+/* Booking */
+.booking { margin-top: 20px; max-width: 34rem; }
+.cal-box { border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
+#cal-inline { width: 100%; overflow: auto; }
+.cal-note { padding: 28px 22px; color: var(--smoke); }
+.cal-note a { color: var(--signal); font-weight: 700; }
+
+/* ---------- Footer ---------- */
+.foot { border-top: 1px solid var(--line); padding-block: 48px 56px; }
+.foot .wrap { display: grid; gap: 32px; }
+.foot-name { font-size: 1.5rem; font-weight: 800; font-stretch: 78%; }
+.foot p + p { margin-top: 4px; }
+.foot .small { color: var(--smoke); }
+.foot a { text-underline-offset: 3px; }
+.foot .index { justify-self: end; color: var(--smoke); }
+.foot .index .spade { color: var(--signal); }
+@media (min-width: 760px) { .foot .wrap { grid-template-columns: 1fr auto; align-items: end; } }
+
+/* ---------- Motion preferences ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-delay: 0s !important; transition-duration: .001ms !important; }
+}
+</style>
+</head>
+
+<body>
+<!-- One drawing of a spade, reused everywhere -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="spade" viewBox="-1 -1 102 114"><path d="M50 0C50 0 9 29 3.5 61C-.5 83 12 94 26.5 94C35.5 94 42.5 90.5 46.8 85C46.8 96 42.5 104.5 32 111L68 111C57.5 104.5 53.2 96 53.2 85C57.5 90.5 64.5 94 73.5 94C88 94 100.5 83 96.5 61C91 29 50 0 50 0Z"/></symbol>
+</svg>
+
+<div id="setup" class="setup" role="status" hidden></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Spade Ace, back to top">
+      <span class="index" aria-hidden="true"><span class="rank">A</span><svg class="spade"><use href="#spade"/></svg></span>
+      <span class="wordmark">Spade Ace</span>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <p class="label">Growth consultancy. Not an agency.</p>
+      <h1 id="hero-h" class="h1"><span>Your business is real.</span><span class="hi">Your growth has stalled.</span></h1>
+      <p class="lede">We build your growth system and take a stake in the outcome. Not just an invoice.</p>
+      <a class="btn" href="#fit">See if we’re a fit
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v15M5.5 12.5 12 19l6.5-6.5"/></svg>
+      </a>
+      <p class="fine">For owners who already have revenue and a working offer. Takes about two minutes.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="problem-h">
+    <div class="wrap">
+      <h2 id="problem-h" class="h2">What stalled growth looks like.</h2>
+      <ul>
+        <li class="row">
+          <h3 class="t3">Content that doesn’t sell.</h3>
+          <p class="body">Reels get views. Followers climb. The enquiries don’t.</p>
+        </li>
+        <li class="row">
+          <h3 class="t3">Ads that burn money.</h3>
+          <p class="body">Lakhs go into Meta and Google. Nobody can say what came back, or what to change.</p>
+        </li>
+        <li class="row">
+          <h3 class="t3">You are the bottleneck.</h3>
+          <p class="body">Every post, price and hire waits for your yes. Growth stops where your day ends.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 id="how-h" class="h2">How we work.</h2>
+      <ol>
+        <li class="step">
+          <span class="n" aria-hidden="true">1</span>
+          <h3 class="t3">Diagnose the constraint.</h3>
+          <p class="body">We go through your numbers, your offer and your funnel. We find the one thing holding growth back before we build anything.</p>
+        </li>
+        <li class="step">
+          <span class="n" aria-hidden="true">2</span>
+          <h3 class="t3">Build the system.</h3>
+          <p class="body">Content, ads, funnel and team. We plan the content, run Meta and Google, tighten the funnel and manage the freelancers who do the work.</p>
+        </li>
+        <li class="step">
+          <span class="n" aria-hidden="true">3</span>
+          <h3 class="t3">Align incentives.</h3>
+          <p class="body">The deal fits the business: a fixed fee, a fee plus performance share, or equity. Once results are proven, we would rather hold a <span class="hi">stake</span> than bill you forever.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="proof-h">
+    <div class="wrap">
+      <h2 id="proof-h" class="h2">Two engagements. Names kept private.</h2>
+      <div class="proofs">
+        <article class="proof">
+          <p class="label">Content pipeline · Paid ads · Member funnel</p>
+          <h3 class="t3">Premium multi-sport complex</h3>
+          <p class="body">A content pipeline so the complex shows up consistently. Paid ads to bring in enquiries. A member funnel that turns an enquiry into a paying member.</p>
+        </article>
+        <article class="proof">
+          <p class="label">Subscriber economics · Content</p>
+          <h3 class="t3">Clean-eating meal subscription service</h3>
+          <p class="body">We worked out what a subscriber costs to win, how long they stay, and what they are worth. Then we built the content around those numbers.</p>
+        </article>
+      </div>
+      <!-- OPTIONAL: if you have a real, checkable result for either engagement, add it as one more sentence in the paragraph above. -->
+      <p class="fine proof-note">Ask us about the work on the call.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="not-h">
+    <div class="wrap">
+      <h2 id="not-h" class="h2">Who this is not for.</h2>
+      <ul class="nots">
+        <li><span class="no">Not for</span> people who want cheap one-off posts.</li>
+        <li><span class="no">Not for</span> owners who won’t give us access to their numbers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="fit" class="sec" aria-labelledby="fit-h">
+    <div class="wrap fit-grid">
+      <div class="fit-intro">
+        <h2 id="fit-h" class="h2">See if we’re a fit.</h2>
+        <p class="body">Tap your answers. If it makes sense for both of us, you pick a time right after.</p>
+      </div>
+      <div class="fit-main">
+        <div id="deck" class="deck">
+          <noscript><p class="body">This page needs JavaScript to run the fit check. Please turn it on and reload.</p></noscript>
+        </div>
+        <div id="booking" class="booking" hidden>
+          <div class="cal-box">
+            <p id="cal-status" class="cal-note" role="status"></p>
+            <div id="cal-inline"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <p class="foot-name">Spade Ace</p>
+      <p class="small">Dombivli, Maharashtra, India</p>
+      <p class="small">Contact: <span id="contact"></span></p>
+      <p class="fine" style="margin-top:20px">© <span id="year">2026</span> Spade Ace</p>
+    </div>
+    <span class="index flip" aria-hidden="true"><span class="rank">A</span><svg class="spade"><use href="#spade"/></svg></span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+
+  const S = window.SPADE_ACE_SETTINGS || {};
+  const isSet = (v) => typeof v === 'string' && v.trim() !== '' && !/^\[[A-Z0-9_]+\]$/.test(v.trim());
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  /* <logic> */
+  /* ============================================================
+     THE RULES. Everything that decides what a visitor sees and what
+     gets written to your sheet lives in this block. No screen code here.
+     ============================================================ */
+  const opt = (id, label) => ({ id, label, value: label.replace(/’/g, "'") });
+
+  const Q = {
+    revenue: [
+      opt('rev1', 'Under ₹5L'),
+      opt('rev2', '₹5L to ₹20L'),
+      opt('rev3', '₹20L to ₹1Cr'),
+      opt('rev4', 'Above ₹1Cr'),
+    ],
+    type: [
+      opt('local', 'Local service or venue'),
+      opt('product', 'Product or e-commerce'),
+      opt('food', 'Food or subscription'),
+      opt('b2b', 'B2B or professional services'),
+      opt('other', 'Other'),
+    ],
+    spends: [opt('yes', 'Yes'), opt('no', 'No')],
+    spend: [
+      opt('sp1', 'Under ₹25K'),
+      opt('sp2', '₹25K to ₹1L'),
+      opt('sp3', '₹1L to ₹5L'),
+      opt('sp4', 'Above ₹5L'),
+    ],
+    bottleneck: [
+      opt('leads', 'Not enough leads'),
+      opt('convert', 'Leads don’t convert'),
+      opt('content', 'Content is inconsistent or weak'),
+      opt('me', 'Everything depends on me'),
+      opt('posts', 'I just need posts or designs made'),
+    ],
+    partner: [
+      opt('fixed', 'Fixed monthly fee'),
+      opt('perf', 'Fee plus performance share'),
+      opt('equity', 'Open to equity or revenue share'),
+      opt('unsure', 'Not sure yet'),
+    ],
+  };
+
+  // The questions a visitor sees, in order. The spend amount only appears after "Yes".
+  const pathFor = (a) => ['revenue', 'type', 'spends', ...(a.spends === 'yes' ? ['spend'] : []), 'bottleneck', 'partner', 'contact'];
+
+  // Lead tag: one per submission. NOT_FIT wins over everything else.
+  function leadTag(a) {
+    if (a.bottleneck === 'posts') return 'NOT_FIT';
+    const revenueIs20LOrMore = a.revenue === 'rev3' || a.revenue === 'rev4';
+    const openToShare = a.partner === 'perf' || a.partner === 'equity';
+    if (revenueIs20LOrMore && a.spends === 'yes' && openToShare) return 'PRIORITY';
+    if (a.revenue === 'rev1') return 'EARLY';
+    return 'STANDARD';
+  }
+
+  // Awareness level, from marketing spend only.
+  function awarenessOf(a) {
+    if (a.spends !== 'yes') return 'LOW';
+    return (a.spend === 'sp2' || a.spend === 'sp3' || a.spend === 'sp4') ? 'HIGH' : 'MEDIUM';
+  }
+
+  const valueOf = (list, id) => { const o = list.find((x) => x.id === id); return o ? o.value : ''; };
+
+  // The exact set of values sent to the Google Sheet script.
+  function buildPayload(a, id) {
+    return {
+      id,
+      name: a.name,
+      business: a.business,
+      whatsapp: a.whatsapp,
+      email: a.email,
+      revenue: valueOf(Q.revenue, a.revenue),
+      businessType: valueOf(Q.type, a.type),
+      spends: a.spends === 'yes' ? 'Yes' : 'No',
+      monthlySpend: a.spends === 'yes' ? valueOf(Q.spend, a.spend) : '',
+      bottleneck: valueOf(Q.bottleneck, a.bottleneck),
+      partner: valueOf(Q.partner, a.partner),
+      leadTag: leadTag(a),
+      awareness: awarenessOf(a),
+    };
+  }
+
+  // Turns what someone typed into +919876543210, or null if it cannot be a real number.
+  function normalisePhone(raw) {
+    const s = String(raw || '').trim();
+    let plus = s.startsWith('+');
+    let d = s.replace(/\D/g, '');
+    if (!plus && d.startsWith('00')) { plus = true; d = d.slice(2); }
+    if (!d) return null;
+    if (plus) return d.length >= 8 && d.length <= 15 ? '+' + d : null;
+    if (d.length === 10 && /^[6-9]/.test(d)) return '+91' + d;
+    if (d.length === 11 && d[0] === '0' && /^[6-9]/.test(d[1])) return '+91' + d.slice(1);
+    if (d.length === 12 && d.startsWith('91') && /^[6-9]/.test(d[2])) return '+' + d;
+    return null;
+  }
+
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  // Accepts rohan/30min, cal.com/rohan/30min or https://cal.com/rohan/30min
+  function calTarget(v) {
+    const raw = String(v || '').trim();
+    const host = /cal\.eu/i.test(raw) ? 'cal.eu' : 'cal.com';
+    const path = raw.replace(/^(?:https?:\/\/)?(?:[\w-]+\.)*cal\.(?:com|eu)\//i, '').replace(/^\/+|\/+$/g, '');
+    return { path, origin: 'https://app.' + host, pageUrl: 'https://' + host + '/' + path };
+  }
+
+  // A WhatsApp number becomes a wa.me link, an email becomes mailto, anything else stays plain text.
+  function contactHref(v) {
+    const s = String(v || '').trim();
+    if (/^https?:\/\//i.test(s)) return s;
+    if (EMAIL_RE.test(s)) return 'mailto:' + s;
+    const digits = s.replace(/\D/g, '');
+    if (/^[+\d\s()-]+$/.test(s) && digits.length >= 10) return 'https://wa.me/' + (digits.length === 10 ? '91' + digits : digits);
+    return null;
+  }
+  /* </logic> */
+
+  /* ---------- Questions on screen ---------- */
+  const TOTAL = 6; // 3b is a follow-up to question 3, so there are always six questions
+  const STEPS = {
+    revenue:    { n: 1, title: 'What is your current monthly revenue?', hint: 'A rough range is fine.', options: Q.revenue },
+    type:       { n: 2, title: 'What best describes your business?', options: Q.type },
+    spends:     { n: 3, title: 'Do you currently spend on marketing or advertising?', options: Q.spends, two: true },
+    spend:      { n: 3, title: 'Roughly how much per month?', hint: 'A rough number is fine.', options: Q.spend },
+    bottleneck: { n: 4, title: 'What is the biggest bottleneck right now?', options: Q.bottleneck },
+    partner:    { n: 5, title: 'How do you prefer to work with a growth partner?', options: Q.partner },
+    contact:    { n: 6, title: 'Last step. Where do we reach you?' },
+  };
+
+  const answers = { revenue: null, type: null, spends: null, spend: null, bottleneck: null, partner: null, name: '', business: '', whatsapp: '', email: '' };
+  let current = 'revenue';
+  let dir = 1;
+  let locked = false;
+  let finished = false;
+
+  /* ---------- Tiny DOM helpers ---------- */
+  function h(tag, attrs, ...kids) {
+    const node = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v === false || v == null) continue;
+      if (k === 'class') node.className = v;
+      else if (k === 'text') node.textContent = v;
+      else node.setAttribute(k, v === true ? '' : v);
+    }
+    node.append(...kids.filter((x) => x != null && x !== false));
+    return node;
+  }
+  const SVG_NS = 'http://www.w3.org/2000/svg';
+  function spade(cls) {
+    const svg = document.createElementNS(SVG_NS, 'svg');
+    svg.setAttribute('class', cls);
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    const use = document.createElementNS(SVG_NS, 'use');
+    use.setAttribute('href', '#spade');
+    svg.append(use);
+    return svg;
+  }
+  const rankIndex = (label) => h('div', { class: 'index', 'aria-hidden': 'true' }, h('span', { class: 'rank', text: label }), spade('spade'));
+
+  const deck = $('#deck');
+
+  function keepInView() {
+    const r = deck.getBoundingClientRect();
+    if (r.top < 8 || r.top > window.innerHeight * 0.55) deck.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+  }
+
+  // scroll is false only for the very first card, so the page never jumps on load
+  function mountCard(card, focusEl, scroll) {
+    deck.replaceChildren(card);
+    if (focusEl) focusEl.focus({ preventScroll: true });
+    if (scroll) keepInView();
+  }
+
+  /* ---------- Question screens ---------- */
+  function pips(n) {
+    const wrap = h('div', { class: 'pips', 'aria-hidden': 'true' });
+    for (let i = 1; i <= TOTAL; i++) wrap.append(spade(i <= n ? 'pip' : 'pip off'));
+    return wrap;
+  }
+
+  function backButton() {
+    const b = h('button', { type: 'button', class: 'back' });
+    b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>';
+    b.append('Back');
+    b.addEventListener('click', () => { if (!locked) go(-1); });
+    return b;
+  }
+
+  function optionList(key, step) {
+    const group = h('div', { class: 'opts' + (step.two ? ' two' : ''), role: 'group', 'aria-labelledby': 'q-title' });
+    step.options.forEach((o) => {
+      const b = h('button', { type: 'button', class: 'opt', 'aria-pressed': String(answers[key] === o.id) }, h('span', { text: o.label }), spade('tick'));
+      b.addEventListener('click', () => choose(key, o.id, group));
+      group.append(b);
+    });
+    return group;
+  }
+
+  function choose(key, id, group) {
+    if (locked) return;
+    locked = true;
+    answers[key] = id;
+    if (key === 'spends' && id === 'no') answers.spend = null;
+    group.querySelectorAll('.opt').forEach((b, i) => b.setAttribute('aria-pressed', String(STEPS[key].options[i].id === id)));
+    setTimeout(() => { locked = false; go(1); }, reduceMotion ? 140 : 280);
+  }
+
+  // Going Back from the contact step must not wipe what the visitor already typed.
+  function rememberContact() {
+    const f = deck.querySelector('form.contact');
+    if (f) ['name', 'business', 'whatsapp', 'email'].forEach((n) => { answers[n] = f.elements[n].value; });
+  }
+
+  function go(delta) {
+    rememberContact();
+    const path = pathFor(answers);
+    const next = path[path.indexOf(current) + delta];
+    if (!next) return;
+    dir = delta;
+    renderStep(next, true);
+  }
+
+  // userAction is false only for the first card shown on page load
+  function renderStep(key, userAction) {
+    current = key;
+    const step = STEPS[key];
+    const q = h('h3', { class: 'q', id: 'q-title', tabindex: '-1', text: step.title });
+    const card = h('div', { class: 'card deal' + (dir < 0 ? ' from-left' : ''), role: 'group', 'aria-label': `Question ${step.n} of ${TOTAL}` },
+      h('div', { class: 'card-top' }, rankIndex(String(step.n)), pips(step.n)),
+      q,
+      step.hint ? h('p', { class: 'hint', text: step.hint }) : null,
+      key === 'contact' ? contactForm() : optionList(key, step),
+      key === 'revenue' ? null : backButton());
+    mountCard(card, userAction ? q : null, userAction);
+  }
+
+  /* ---------- Contact details ---------- */
+  function field(name, label, attrs) {
+    const input = h('input', Object.assign({ id: 'f-' + name, name, required: false }, attrs));
+    input.value = answers[name] || '';
+    return h('div', { class: 'field' }, h('label', { for: 'f-' + name, text: label }), input);
+  }
+
+  function contactForm() {
+    const f = h('form', { class: 'contact', novalidate: true },
+      field('name', 'Your name', { type: 'text', autocomplete: 'name', autocapitalize: 'words', enterkeyhint: 'next', maxlength: '80' }),
+      field('business', 'Business name', { type: 'text', autocomplete: 'organization', autocapitalize: 'words', enterkeyhint: 'next', maxlength: '100' }),
+      field('whatsapp', 'WhatsApp number', { type: 'tel', inputmode: 'tel', autocomplete: 'tel', enterkeyhint: 'next', maxlength: '20', placeholder: '98765 43210' }),
+      field('email', 'Email', { type: 'email', inputmode: 'email', autocomplete: 'email', autocapitalize: 'none', enterkeyhint: 'send', maxlength: '120', placeholder: 'you@yourbusiness.com' }),
+      h('div', { class: 'hp', 'aria-hidden': 'true' }, h('label', { for: 'f-trap', text: 'Leave this empty' }), h('input', { id: 'f-trap', name: 'company_site_check', type: 'text', tabindex: '-1', autocomplete: 'off' })),
+      h('button', { type: 'submit', class: 'btn btn--ink btn--block', text: 'Send my answers' }),
+      h('p', { class: 'fine', text: 'We use your details only to get back to you.' }));
+    f.addEventListener('submit', onSubmit);
+    return f;
+  }
+
+  function showError(form, name, message) {
+    const input = form.elements[name];
+    const holder = input.closest('.field');
+    holder.querySelectorAll('.err').forEach((n) => n.remove());
+    if (!message) { input.removeAttribute('aria-invalid'); input.removeAttribute('aria-describedby'); return; }
+    input.setAttribute('aria-invalid', 'true');
+    input.setAttribute('aria-describedby', 'err-' + name);
+    holder.append(h('p', { class: 'err', id: 'err-' + name, role: 'alert', text: message }));
+  }
+
+  function onSubmit(e) {
+    e.preventDefault();
+    const f = e.currentTarget;
+    const text = (n) => f.elements[n].value.replace(/\s+/g, ' ').trim();
+    const name = text('name');
+    const business = text('business');
+    const whatsapp = normalisePhone(f.elements.whatsapp.value);
+    const email = text('email').toLowerCase();
+
+    const problems = {
+      name: name.length < 2 ? 'Add your name.' : '',
+      business: business.length < 2 ? 'Add your business name.' : '',
+      whatsapp: whatsapp ? '' : 'Enter a 10-digit WhatsApp number. Outside India? Start with + and your country code.',
+      email: EMAIL_RE.test(email) ? '' : 'Enter a valid email address.',
+    };
+    Object.keys(problems).forEach((n) => showError(f, n, problems[n]));
+    const firstBad = Object.keys(problems).find((n) => problems[n]);
+    if (firstBad) { f.elements[firstBad].focus(); return; }
+
+    Object.assign(answers, { name, business, whatsapp, email });
+    finish(text('company_site_check') !== '');
+  }
+
+  /* ---------- Finishing: save the row, then show the right screen ---------- */
+  const newId = () => (window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'id-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10));
+
+  function finish(looksLikeBot) {
+    if (finished) return;
+    finished = true;
+    const payload = buildPayload(answers, newId());
+    if (!looksLikeBot) deliver(payload); // runs in the background, the visitor never waits for it
+    if (payload.leadTag === 'NOT_FIT') showNotFit(); else showBooking();
+  }
+
+  const firstName = () => answers.name.split(' ')[0];
+
+  function showNotFit() {
+    const c = S.contact;
+    const contactEl = isSet(c) ? contactNode(c) : null;
+    const q = h('h3', { class: 't3', id: 'q-title', tabindex: '-1', text: `Thanks, ${firstName()}. We’re not the right fit.` });
+    const card = h('div', { class: 'card card--result deal', role: 'group', 'aria-label': 'Result' },
+      h('div', { class: 'card-top' }, spade('big-spade')),
+      q,
+      h('p', { text: 'We build growth systems and take a stake in the outcome. That is the wrong tool for posts or designs on their own. A good freelancer or design studio will serve you better, and cost you less.' }),
+      contactEl ? h('p', {}, 'If we have this wrong, write to us at ', contactEl, '.') : null);
+    dir = 1;
+    mountCard(card, q, true);
+  }
+
+  function showBooking() {
+    const q = h('h3', { class: 't3', id: 'q-title', tabindex: '-1', text: `Got it, ${firstName()}.` });
+    const card = h('div', { class: 'card card--result deal', role: 'group', 'aria-label': 'Result' },
+      h('div', { class: 'card-top' }, rankIndex('A'), spade('big-spade')),
+      q,
+      h('p', { text: 'Pick a time that suits you below. We read your answers before the call, so we can skip the basics.' }));
+    dir = 1;
+    mountCard(card, q, true);
+    const booking = $('#booking');
+    booking.hidden = false;
+    loadCal();
+  }
+
+  /* ---------- Saving to Google Sheets (never shows the visitor an error) ---------- */
+  const PENDING_KEY = 'spadeace.pending';
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const readPending = () => { try { return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); } catch (e) { return []; } };
+  const writePending = (list) => { try { localStorage.setItem(PENDING_KEY, JSON.stringify(list)); } catch (e) { /* storage blocked: fine */ } };
+  const dropPending = (id) => writePending(readPending().filter((p) => p.id !== id));
+
+  async function send(payload) {
+    const ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    const timer = ctl ? setTimeout(() => ctl.abort(), 20000) : null;
+    try {
+      // "no-cors" lets the browser deliver the message to Google even though Google
+      // does not reply in a way the page may read. The sheet script does the checking.
+      await fetch(S.sheetUrl.trim(), { method: 'POST', mode: 'no-cors', keepalive: true, body: JSON.stringify(payload), signal: ctl ? ctl.signal : undefined });
+      return true;
+    } catch (e) {
+      return false;
+    } finally {
+      if (timer) clearTimeout(timer);
+    }
+  }
+
+  async function deliver(payload) {
+    try {
+      if (!isSet(S.sheetUrl)) { console.info('Spade Ace: the sheet address is not set yet, so this submission was not saved.'); return; }
+      writePending(readPending().filter((p) => p.id !== payload.id).concat(payload)); // keep a copy until Google has it
+      for (const pause of [0, 1500, 6000]) {
+        if (pause) await wait(pause);
+        if (await send(payload)) { dropPending(payload.id); return; }
+      }
+    } catch (e) { /* never surface an error to the visitor */ }
+  }
+
+  function retryPending() {
+    try {
+      if (!isSet(S.sheetUrl)) return;
+      readPending().forEach((p) => { send(p).then((ok) => { if (ok) dropPending(p.id); }); });
+    } catch (e) { /* ignore */ }
+  }
+
+  /* ---------- Cal.com booking widget ---------- */
+  function loadCal() {
+    const box = $('#cal-inline');
+    const status = $('#cal-status');
+    const say = (...kids) => { status.hidden = false; status.replaceChildren(...kids); };
+    if (!isSet(S.calLink)) {
+      say('Your booking calendar appears here once you add your Cal.com link in the settings at the top of index.html.');
+      return;
+    }
+    const target = calTarget(S.calLink);
+    say('Loading the calendar…');
+    // Cal adds its calendar next to our note, so hide the note the moment the calendar appears.
+    if (window.MutationObserver) {
+      new MutationObserver((records, obs) => { if (box.querySelector('iframe')) { status.hidden = true; obs.disconnect(); } }).observe(box, { childList: true, subtree: true });
+    }
+    try {
+      // Cal.com's own loader, unchanged in behaviour: it queues our calls until their script arrives.
+      (function (C, A, L) {
+        const p = function (a, ar) { a.q.push(ar); };
+        const d = C.document;
+        C.Cal = C.Cal || function () {
+          const cal = C.Cal; const ar = arguments;
+          if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+          if (ar[0] === L) {
+            const api = function () { p(api, arguments); };
+            const namespace = ar[1];
+            api.q = api.q || [];
+            if (typeof namespace === 'string') { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]); } else p(cal, ar);
+            return;
+          }
+          p(cal, ar);
+        };
+      })(window, target.origin + '/embed/embed.js', 'init');
+
+      const brand = { 'cal-brand': '#ffc800', 'cal-brand-emphasis': '#ffd84a', 'cal-brand-text': '#0a0a0a' };
+      window.Cal('init', { origin: target.origin });
+      window.Cal('inline', {
+        elementOrSelector: '#cal-inline',
+        calLink: target.path,
+        config: { layout: 'month_view', theme: 'dark', name: answers.name, email: answers.email },
+      });
+      window.Cal('ui', { theme: 'dark', hideEventTypeDetails: false, layout: 'month_view', cssVarsPerTheme: { dark: brand, light: brand } });
+    } catch (e) { calFallback(box, say, target); return; }
+
+    // If the calendar has not appeared after a while (blocked or slow network), offer a plain link instead.
+    setTimeout(() => calFallback(box, say, target), 10000);
+  }
+
+  function calFallback(box, say, target) {
+    if (box.querySelector('iframe')) return;
+    say('The calendar is taking a while. ', h('a', { href: target.pageUrl, target: '_blank', rel: 'noopener', text: 'Open the booking page' }), ' to pick a time.');
+  }
+
+  /* ---------- Footer contact, year, setup bar ---------- */
+  function contactNode(text) {
+    const href = contactHref(text);
+    return href ? h('a', { href, rel: 'noopener', target: /^https?:/.test(href) ? '_blank' : null, text }) : document.createTextNode(text);
+  }
+
+  function initPage() {
+    const c = S.contact == null ? '' : String(S.contact);
+    $('#contact').replaceChildren(isSet(c) ? contactNode(c) : document.createTextNode(c));
+    $('#year').textContent = new Date().getFullYear();
+
+    const missing = [S.sheetUrl, S.calLink, S.contact].filter((v) => !isSet(v));
+    if (missing.length) {
+      const bar = $('#setup');
+      bar.textContent = 'Setup preview. Still to fill in, at the top of index.html: ' + missing.map((v) => String(v || '(empty)')).join('  ');
+      bar.hidden = false;
+    }
+    renderStep('revenue', false); // first card: no focus change, no scrolling
+    retryPending();
+    window.addEventListener('online', retryPending);
+  }
+
+  initPage();
+})();
+</script>
+</body>
+</html>
