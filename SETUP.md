@@ -9,6 +9,7 @@ You do not need to code. Words that sound technical are explained the first time
 | `site/index.html` | Your whole website. One file. This is what you put online. |
 | `apps-script/Code.gs` | A small program that lives inside your Google Sheet. It adds one new row for every person who finishes the form. |
 | `apps-script/CHROME-TASK.md` | The exact job list Claude follows to set up the Google Sheet through your Chrome. |
+| `apps-script/SHEET-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet and publishes the script. |
 | `cal-com/CAL-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up your Cal.com booking page. |
 | `SETUP.md` | This guide. |
 
@@ -43,7 +44,7 @@ Some words first:
 - **Deploy** means "publish this program so your website can talk to it".
 - A **web app** is a program that has its own web address. Your website sends each new lead to that address.
 
-Claude creates the sheet, adds the script, publishes it and puts the address into the page, working in your Chrome. You do not do any of it. The exact job list is in `apps-script/CHROME-TASK.md`.
+Claude creates the sheet, adds the script, publishes it and puts the address into the page, working in your Chrome. You do not do any of it. The exact job list is in `apps-script/CHROME-TASK.md`, and `apps-script/SHEET-SETUP-PROMPT.md` is the same job as a ready-to-paste prompt for Claude in Chrome. It ends with a short message starting `SHEET SETUP REPORT`: send that to Claude Code and Claude puts the address into the page and re-tests it.
 
 **Status: not done yet.** The session that built the page could not reach your Chrome, so this part has not been run, and nothing has been faked. Until it is done, `[SHEET_WEBAPP_URL]` stays a placeholder and the page does not save leads. The job runs as soon as Claude is working on your computer with the Chrome extension on.
 

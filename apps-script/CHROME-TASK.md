@@ -2,6 +2,8 @@
 
 **Status: NOT DONE.** The cloud session that built this page had no Chrome extension connected, so none of the steps below has been run. Nothing was faked: `[SHEET_WEBAPP_URL]` in `site/index.html` is still a placeholder and leads are not being saved yet.
 
+**Paste-ready version:** `apps-script/SHEET-SETUP-PROMPT.md` is the same job written as a self-contained prompt for Claude in Chrome (Cowork), with the script embedded. It ends in a `SHEET SETUP REPORT` to send back to Claude Code.
+
 **Who does it:** Claude, using the Claude in Chrome extension on the owner's computer. The owner asked not to be handed these steps.
 
 ## Goal
