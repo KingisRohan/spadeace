@@ -7,7 +7,7 @@
 /* ==================================================================
    YOUR THREE SETTINGS. These are the only lines you ever need to edit.
    Replace the text inside the quotes and keep the quotes.
-   While a setting still shows its [BRACKETS], the page shows a yellow
+   While a setting still shows its [BRACKETS], the page shows a crimson
    "setup" bar at the top. The bar disappears once all three are filled.
    ================================================================== */
 window.SPADE_ACE_SETTINGS = {
@@ -24,13 +24,13 @@ window.SPADE_ACE_SETTINGS = {
 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Spade Ace: growth consultancy for owner-run businesses in India</title>
-<meta name="description" content="Spade Ace is a growth consultancy in India. We build your growth system and take a stake in the outcome, not just an invoice.">
-<meta name="theme-color" content="#0a0a0a">
-<meta name="color-scheme" content="dark">
+<meta name="description" content="Spade Ace is a growth consultancy in India. We build your growth system and tie our reward to your results. Not just an invoice.">
+<meta name="theme-color" content="#ffffff">
+<meta name="color-scheme" content="light">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Spade Ace: growth consultancy">
-<meta property="og:description" content="We build your growth system and take a stake in the outcome, not just an invoice.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%27-1%20-1%20102%20114%27%3E%3Cpath%20fill%3D%27%23FFC800%27%20d%3D%27M50%200C50%200%209%2029%203.5%2061C-.5%2083%2012%2094%2026.5%2094C35.5%2094%2042.5%2090.5%2046.8%2085C46.8%2096%2042.5%20104.5%2032%20111L68%20111C57.5%20104.5%2053.2%2096%2053.2%2085C57.5%2090.5%2064.5%2094%2073.5%2094C88%2094%20100.5%2083%2096.5%2061C91%2029%2050%200%2050%200Z%27%2F%3E%3C%2Fsvg%3E">
+<meta property="og:description" content="We build your growth system and tie our reward to your results. Not just an invoice.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%27-1%20-1%20102%20114%27%3E%3Cpath%20fill%3D%27%23DC143C%27%20d%3D%27M50%200C50%200%209%2029%203.5%2061C-.5%2083%2012%2094%2026.5%2094C35.5%2094%2042.5%2090.5%2046.8%2085C46.8%2096%2042.5%20104.5%2032%20111L68%20111C57.5%20104.5%2053.2%2096%2053.2%2085C57.5%2090.5%2064.5%2094%2073.5%2094C88%2094%20100.5%2083%2096.5%2061C91%2029%2050%200%2050%200Z%27%2F%3E%3C%2Fsvg%3E">
 
 <!-- Fonts: Archivo (all text) and a tiny Libre Bodoni subset (card numbers only). Both from Google Fonts. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,14 +40,13 @@ window.SPADE_ACE_SETTINGS = {
 
 <style>
 /* ---------- Tokens ---------- */
+/* White is the background. Crimson is the highlight. Black is the supporting colour. */
 :root {
-  --ink: #0a0a0a;          /* page */
-  --paper: #efebe1;        /* card stock, and text on black */
-  --smoke: #9a978e;        /* quiet text on black */
-  --line: #272624;         /* hairlines on black */
-  --signal: #ffc800;       /* the one accent */
-  --card-smoke: #5e5b53;   /* quiet text on the card */
-  --card-line: rgba(10, 10, 10, .2);
+  --crimson: #dc143c;
+  --crimson-deep: #b80f30;  /* hover and pressed state of crimson buttons */
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --grey: #595959;          /* quiet text on white */
   --gutter: clamp(20px, 5.6vw, 56px);
   --max: 70rem;
   --r-card: 20px;
@@ -57,19 +56,26 @@ window.SPADE_ACE_SETTINGS = {
   --card-serif: "Libre Bodoni", "Bodoni 72", Didot, Georgia, "Times New Roman", serif;
 }
 
+/* Each band of the page sets its own colours. Components below only read these names:
+   --fg text, --muted quieter text, --label small caps, --rule hairlines,
+   --mark the highlight colour (crimson on both white and black). */
+.on-white { --bg: #fff; --fg: var(--black); --muted: var(--grey); --label: var(--crimson); --rule: #e6e6e6; --mark: var(--crimson); --focus: var(--crimson); --sel-bg: var(--crimson); --sel-fg: #fff; }
+.on-black { --bg: var(--black); --fg: #fff; --muted: #bdbdbd; --label: #bdbdbd; --rule: #2b2b2b; --mark: var(--crimson); --focus: #fff; --sel-bg: var(--crimson); --sel-fg: #fff; }
+.on-white, .on-black { background: var(--bg); color: var(--fg); }
+
 /* ---------- Base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
 html {
-  background: var(--ink);
-  color-scheme: dark;
+  background: #fff;
+  color-scheme: light;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--paper);
+  background: #fff;
+  color: var(--black);
   font-family: var(--sans);
   font-size: 1.0625rem;
   font-weight: 400;
@@ -87,8 +93,8 @@ a { color: inherit; }
 button, input { font: inherit; color: inherit; }
 svg { display: block; }
 [hidden] { display: none !important; }
-::selection { background: var(--signal); color: var(--ink); }
-:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
+::selection { background: var(--sel-bg, #dc143c); color: var(--sel-fg, #fff); }
+:focus-visible { outline: 3px solid var(--focus, #dc143c); outline-offset: 3px; }
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 .wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
@@ -101,7 +107,7 @@ svg { display: block; }
   letter-spacing: .12em;
   line-height: 1.5;
   text-transform: uppercase;
-  color: var(--smoke);
+  color: var(--label);
   text-wrap: balance;
 }
 .h1 {
@@ -134,9 +140,10 @@ svg { display: block; }
   max-width: 26em;
   text-wrap: balance;
 }
-.body { color: var(--smoke); max-width: 34em; text-wrap: pretty; }
-.fine { font-size: .875rem; color: var(--smoke); line-height: 1.45; text-wrap: pretty; }
-.hi { color: var(--signal); }
+.body { color: var(--muted); max-width: 34em; text-wrap: pretty; }
+.fine { font-size: .875rem; color: var(--muted); line-height: 1.45; text-wrap: pretty; }
+.mk, .dot, .hi { color: var(--mark); }     /* the highlight colour */
+.hi { font-weight: 700; }
 
 /* ---------- Spade + card index ---------- */
 .spade { width: 1em; height: 1.12em; fill: currentColor; }
@@ -145,6 +152,7 @@ svg { display: block; }
   justify-items: center;
   gap: 4px;
   line-height: 1;
+  color: var(--fg);
 }
 .index .rank {
   font-family: var(--card-serif);
@@ -153,13 +161,13 @@ svg { display: block; }
   line-height: .9;
   font-variant-numeric: lining-nums;
 }
-.index .spade { font-size: 15px; }
+.index .spade { font-size: 15px; color: var(--mark); }
 .flip { transform: rotate(180deg); }
 
 /* ---------- Setup bar (only visible while a setting still has [BRACKETS]) ---------- */
 .setup {
-  background: var(--signal);
-  color: var(--ink);
+  background: var(--crimson);
+  color: #fff;
   font-size: .8125rem;
   font-weight: 600;
   line-height: 1.4;
@@ -170,8 +178,6 @@ svg { display: block; }
 /* ---------- Header ---------- */
 .top { padding-block: 22px 8px; }
 .brand { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; }
-.brand .index { color: var(--paper); }
-.brand .index .spade { color: var(--signal); }
 .wordmark { font-size: 1.3rem; font-weight: 800; font-stretch: 78%; letter-spacing: .01em; }
 
 /* ---------- Buttons ---------- */
@@ -184,31 +190,29 @@ svg { display: block; }
   padding: 0 26px;
   border: 0;
   border-radius: var(--r-ctl);
-  background: var(--signal);
-  color: var(--ink);
+  background: var(--crimson);
+  color: #fff;
   font-size: 1.125rem;
   font-weight: 800;
   font-stretch: 88%;
   letter-spacing: .005em;
   text-decoration: none;
   cursor: pointer;
-  transition: transform .12s var(--ease), background-color .15s;
+  transition: transform .12s var(--ease), background-color .15s, color .15s;
 }
 .btn:active { transform: scale(.98); }
 .btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; transition: transform .2s var(--ease); }
 @media (hover: hover) {
-  .btn:hover { background: #ffd84a; }
+  .btn:hover { background: var(--black); color: #fff; }
   .btn:hover svg { transform: translateY(3px); }
+  .btn--crimson:hover { background: var(--crimson-deep); }   /* inside the black card, black would vanish */
 }
-.btn--ink { background: var(--ink); color: var(--paper); }
-@media (hover: hover) { .btn--ink:hover { background: #1f1e1c; } }
 .btn--block { width: 100%; }
 
 /* ---------- Hero ---------- */
 .hero { padding-block: clamp(36px, 8vw, 96px) clamp(80px, 13vw, 160px); }
 .hero > * + * { margin-top: clamp(20px, 3.4vw, 28px); }
 .hero .label { margin-bottom: clamp(6px, 1.6vw, 14px); }
-.hero .h1 .hi { display: block; }
 .hero .lede { margin-top: clamp(30px, 5vw, 44px); }
 .hero .btn { width: 100%; margin-top: clamp(32px, 5vw, 44px); }
 .hero .fine { max-width: 24em; margin-top: 16px; }
@@ -224,21 +228,22 @@ svg { display: block; }
 /* ---------- Sections ---------- */
 /* Nothing may push the page sideways on a phone (the card slides in from the right). */
 .hero, .sec, .foot { overflow-x: hidden; overflow-x: clip; }
-.sec { border-top: 1px solid var(--line); padding-block: clamp(72px, 12vw, 148px); }
+.sec { border-top: 1px solid var(--rule); padding-block: clamp(72px, 12vw, 148px); }
+.sec.on-black, .on-black + .sec { border-top: 0; }
 .sec .h2 + * { margin-top: clamp(36px, 6vw, 64px); }
 
 /* Problem: three hairline rows */
-.row { display: grid; gap: 10px; padding-block: 28px; border-top: 1px solid var(--line); }
-.row:last-child { border-bottom: 1px solid var(--line); }
+.row { display: grid; gap: 10px; padding-block: 28px; border-top: 1px solid var(--rule); }
+.row:last-child { border-bottom: 1px solid var(--rule); }
 .row .body { max-width: 30em; }
 @media (min-width: 860px) {
   .row { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 48px; align-items: baseline; padding-block: 40px; }
 }
 
 /* How we work: three steps */
-.step { display: grid; grid-template-columns: 3.4rem 1fr; gap: 6px 14px; padding-block: 28px; border-top: 1px solid var(--line); }
-.step:last-child { border-bottom: 1px solid var(--line); }
-.step .n { grid-row: span 2; font-size: 3.6rem; font-weight: 900; font-stretch: 62%; line-height: .8; color: var(--smoke); }
+.step { display: grid; grid-template-columns: 3.4rem 1fr; gap: 6px 14px; padding-block: 28px; border-top: 1px solid var(--rule); }
+.step:last-child { border-bottom: 1px solid var(--rule); }
+.step .n { grid-row: span 2; font-size: 3.6rem; font-weight: 900; font-stretch: 62%; line-height: .8; color: var(--mark); }
 .step .body { max-width: 32em; }
 @media (min-width: 860px) {
   .step { grid-template-columns: 6rem minmax(0, 5fr) minmax(0, 6fr); gap: 0 48px; align-items: baseline; padding-block: 40px; }
@@ -247,13 +252,13 @@ svg { display: block; }
 
 /* Proof: two engagements */
 .proofs { display: grid; gap: 52px; }
-.proof { border-top: 1px solid var(--line); padding-top: 22px; display: grid; gap: 14px; align-content: start; }
+.proof { border-top: 1px solid var(--rule); padding-top: 22px; display: grid; gap: 14px; align-content: start; }
 .proof .t3 { margin-top: 2px; }
 .proof .body { max-width: 28em; }
 .proof-note { margin-top: clamp(32px, 5vw, 48px); }
 @media (min-width: 860px) { .proofs { grid-template-columns: 1fr 1fr; gap: 64px; } }
 
-/* Not for */
+/* Not for (the black band) */
 .nots { display: grid; gap: clamp(20px, 3.4vw, 32px); }
 .nots li {
   font-size: clamp(2rem, 8.4vw, 4.1rem);
@@ -263,7 +268,7 @@ svg { display: block; }
   text-wrap: balance;
   max-width: 17em;
 }
-.nots .no { color: var(--signal); }
+.nots .no { color: var(--mark); }
 
 /* Fit check */
 .fit-grid { display: grid; gap: 40px; }
@@ -274,26 +279,28 @@ svg { display: block; }
   .fit-intro { position: sticky; top: 40px; }
 }
 
-/* ---------- The card ---------- */
+/* ---------- The card: a black playing card with crimson spades, dealt onto the white page ---------- */
 .deck { scroll-margin-top: 14px; }
 .card {
+  --fg: #fff;
+  --muted: #bdbdbd;
+  --mark: var(--crimson);
+  --focus: #fff;
   position: relative;
   max-width: 34rem;
   padding: 20px 20px 22px;
   border-radius: var(--r-card);
-  background: var(--paper);
-  color: var(--ink);
-  color-scheme: light;
+  background: var(--black);
+  color: #fff;
+  color-scheme: dark;
 }
-.card :focus-visible { outline-color: var(--ink); }
 .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; min-height: 58px; }
-.card .index .spade { font-size: 15px; }
 .pips { display: flex; gap: 6px; align-items: center; padding-top: 4px; }
-.pip { width: 13px; height: 15px; fill: var(--ink); }
-.pip.off { opacity: .2; }
+.pip { width: 13px; height: 15px; fill: var(--crimson); }
+.pip.off { fill: #fff; opacity: .24; }
 .q { margin-top: 22px; font-size: clamp(1.95rem, 7.8vw, 2.45rem); font-weight: 800; font-stretch: 68%; line-height: 1; text-wrap: balance; }
 .q:focus { outline: none; }
-.hint { margin-top: 8px; font-size: .9375rem; color: var(--card-smoke); }
+.hint { margin-top: 8px; font-size: .9375rem; color: var(--muted); }
 
 .opts { display: grid; gap: 8px; margin-top: 22px; }
 .opts.two { grid-template-columns: 1fr 1fr; }
@@ -307,10 +314,10 @@ svg { display: block; }
   width: 100%;
   min-height: 56px;
   padding: 12px 16px;
-  border: 1.5px solid var(--card-line);
+  border: 1.5px solid rgba(255, 255, 255, .34);
   border-radius: var(--r-ctl);
   background: transparent;
-  color: var(--ink);
+  color: #fff;
   font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.25;
@@ -318,11 +325,11 @@ svg { display: block; }
   cursor: pointer;
   transition: background-color .15s, border-color .15s, transform .1s;
 }
-.opt .tick { flex: none; width: 13px; height: 15px; opacity: 0; transform: scale(.5); transition: opacity .15s, transform .25s var(--ease); fill: var(--ink); }
+.opt .tick { flex: none; width: 13px; height: 15px; opacity: 0; transform: scale(.5); transition: opacity .15s, transform .25s var(--ease); fill: #fff; }
 .opt:active { transform: scale(.985); }
-.opt[aria-pressed="true"] { background: var(--signal); border-color: var(--ink); }
+.opt[aria-pressed="true"] { background: var(--crimson); border-color: var(--crimson); }
 .opt[aria-pressed="true"] .tick { opacity: 1; transform: none; }
-@media (hover: hover) { .opt:hover { border-color: var(--ink); } }
+@media (hover: hover) { .opt:hover { border-color: #fff; } .opt[aria-pressed="true"]:hover { border-color: var(--crimson); } }
 
 .back {
   display: inline-flex;
@@ -333,55 +340,58 @@ svg { display: block; }
   padding: 0 6px;
   border: 0;
   background: none;
-  color: var(--card-smoke);
+  color: var(--muted);
   font-size: .9375rem;
   font-weight: 600;
   cursor: pointer;
 }
 .back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-@media (hover: hover) { .back:hover { color: var(--ink); } }
+@media (hover: hover) { .back:hover { color: #fff; } }
 
 /* Contact fields */
 .contact { margin-top: 6px; }
 .field { display: grid; gap: 6px; margin-top: 16px; }
-.field label { font-size: .8125rem; font-weight: 700; letter-spacing: .03em; color: var(--card-smoke); }
+.field label { font-size: .8125rem; font-weight: 700; letter-spacing: .03em; color: var(--muted); }
 .field input {
   width: 100%;
   min-height: 54px;
   padding: 0 14px;
-  border: 1.5px solid var(--card-line);
+  border: 1.5px solid rgba(255, 255, 255, .34);
   border-radius: var(--r-ctl);
-  background: rgba(255, 255, 255, .5);
-  color: var(--ink);
+  background: #161616;
+  color: #fff;
   font-size: 1.0625rem;
   font-weight: 500;
   -webkit-appearance: none;
   appearance: none;
 }
-.field input::placeholder { color: #6b6861; font-weight: 400; opacity: 1; }
-.field input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px var(--signal); }
-.field input[aria-invalid="true"] { border-color: var(--ink); border-width: 2px; }
+.field input::placeholder { color: #9b9b9b; font-weight: 400; opacity: 1; }
+.field input:focus { outline: none; border-color: #fff; box-shadow: 0 0 0 3px var(--crimson); }
+.field input[aria-invalid="true"] { border-color: #fff; border-width: 2px; }
+/* keep browser autofill from painting its own pale colour over the dark fields */
+.field input:-webkit-autofill { -webkit-text-fill-color: #fff; caret-color: #fff; -webkit-box-shadow: 0 0 0 1000px #161616 inset; box-shadow: 0 0 0 1000px #161616 inset; }
 .err {
   justify-self: start;
   padding: 3px 9px;
   border-radius: 6px;
-  background: var(--signal);
-  color: var(--ink);
+  background: var(--crimson);
+  color: #fff;
   font-size: .875rem;
   font-weight: 600;
   line-height: 1.35;
 }
 .contact .btn { margin-top: 22px; }
-.contact .fine { margin-top: 12px; color: var(--card-smoke); text-align: center; }
+.contact .fine { margin-top: 12px; color: var(--muted); text-align: center; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
-/* Result cards */
+/* Result cards: the Ace gets a crimson spade, the polite no gets a quiet white one */
 .card--result .card-top { align-items: center; }
-.big-spade { width: 64px; height: 72px; fill: var(--ink); }
+.big-spade { width: 64px; height: 72px; fill: var(--crimson); }
+.card--quiet .big-spade { fill: #fff; }
 .card--result .t3 { margin-top: 20px; }
-.card--result .t3 + p { margin-top: 14px; color: var(--card-smoke); }
+.card--result .t3 + p { margin-top: 14px; color: var(--muted); }
 .card--result p + p { margin-top: 12px; }
-.card--result a { font-weight: 700; }
+.card--result a { font-weight: 700; color: #fff; text-decoration: underline; text-decoration-color: var(--crimson); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
 /* Card entrance */
 @keyframes deal { from { opacity: 0; transform: translateX(20px) rotate(1deg); } to { opacity: 1; transform: none; } }
@@ -389,22 +399,21 @@ svg { display: block; }
 .deal { animation: deal .32s var(--ease) both; }
 .deal.from-left { animation-name: deal-back; }
 
-/* Booking */
+/* Booking: the calendar sits in a black card too */
 .booking { margin-top: 20px; max-width: 34rem; }
-.cal-box { border: 1px solid var(--line); border-radius: var(--r-card); overflow: hidden; }
+.cal-box { background: var(--black); color: #fff; border-radius: var(--r-card); overflow: hidden; }
 #cal-inline { width: 100%; overflow: auto; }
-.cal-note { padding: 28px 22px; color: var(--smoke); }
-.cal-note a { color: var(--signal); font-weight: 700; }
+.cal-note { padding: 28px 22px; color: #bdbdbd; }
+.cal-note a { color: #fff; font-weight: 700; text-decoration: underline; text-decoration-color: var(--crimson); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 
-/* ---------- Footer ---------- */
-.foot { border-top: 1px solid var(--line); padding-block: 48px 56px; }
+/* ---------- Footer (the other black band) ---------- */
+.foot { padding-block: 48px 56px; }
 .foot .wrap { display: grid; gap: 32px; }
 .foot-name { font-size: 1.5rem; font-weight: 800; font-stretch: 78%; }
 .foot p + p { margin-top: 4px; }
-.foot .small { color: var(--smoke); }
+.foot .small { color: var(--muted); }
 .foot a { text-underline-offset: 3px; }
-.foot .index { justify-self: end; color: var(--smoke); }
-.foot .index .spade { color: var(--signal); }
+.foot .index { justify-self: end; }
 @media (min-width: 760px) { .foot .wrap { grid-template-columns: 1fr auto; align-items: end; } }
 
 /* ---------- Motion preferences ---------- */
@@ -423,7 +432,7 @@ svg { display: block; }
 
 <div id="setup" class="setup" role="status" hidden></div>
 
-<header class="top">
+<header class="top on-white">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Spade Ace, back to top">
       <span class="index" aria-hidden="true"><span class="rank">A</span><svg class="spade"><use href="#spade"/></svg></span>
@@ -434,11 +443,11 @@ svg { display: block; }
 
 <main id="top">
 
-  <section class="hero" aria-labelledby="hero-h">
+  <section class="hero on-white" aria-labelledby="hero-h">
     <div class="wrap">
       <p class="label">Growth consultancy. Not an agency.</p>
-      <h1 id="hero-h" class="h1"><span>Your business is real.</span><span class="hi">Your growth has stalled.</span></h1>
-      <p class="lede">We build your growth system and take a stake in the outcome. Not just an invoice.</p>
+      <h1 id="hero-h" class="h1"><span>Your business is real.</span><span class="mk">Your growth has stalled.</span></h1>
+      <p class="lede">We build your growth system and tie our reward to your results. Not just an invoice.</p>
       <a class="btn" href="#fit">See if we’re a fit
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4v15M5.5 12.5 12 19l6.5-6.5"/></svg>
       </a>
@@ -446,9 +455,9 @@ svg { display: block; }
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="problem-h">
+  <section class="sec on-white" aria-labelledby="problem-h">
     <div class="wrap">
-      <h2 id="problem-h" class="h2">What stalled growth looks like.</h2>
+      <h2 id="problem-h" class="h2">What stalled growth looks like<span class="dot">.</span></h2>
       <ul>
         <li class="row">
           <h3 class="t3">Content that doesn’t sell.</h3>
@@ -466,9 +475,9 @@ svg { display: block; }
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="how-h">
+  <section class="sec on-white" aria-labelledby="how-h">
     <div class="wrap">
-      <h2 id="how-h" class="h2">How we work.</h2>
+      <h2 id="how-h" class="h2">How we work<span class="dot">.</span></h2>
       <ol>
         <li class="step">
           <span class="n" aria-hidden="true">1</span>
@@ -483,15 +492,15 @@ svg { display: block; }
         <li class="step">
           <span class="n" aria-hidden="true">3</span>
           <h3 class="t3">Align incentives.</h3>
-          <p class="body">The deal fits the business: a fixed fee, or a fee plus a <span class="hi">share of the results</span>. Where it makes sense, we tie our reward to your growth, not to our hours.</p>
+          <p class="body">The deal fits the business: a fixed fee, or a fee plus a <span class="hi">share of the results</span>. Where it makes sense, we link our reward to your growth, not to our hours.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="proof-h">
+  <section class="sec on-white" aria-labelledby="proof-h">
     <div class="wrap">
-      <h2 id="proof-h" class="h2">Two engagements. Names kept private.</h2>
+      <h2 id="proof-h" class="h2">Two engagements. Names kept private<span class="dot">.</span></h2>
       <div class="proofs">
         <article class="proof">
           <p class="label">Content pipeline · Paid ads · Member funnel</p>
@@ -509,9 +518,9 @@ svg { display: block; }
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="not-h">
+  <section class="sec on-black" aria-labelledby="not-h">
     <div class="wrap">
-      <h2 id="not-h" class="h2">Who this is not for.</h2>
+      <h2 id="not-h" class="h2">Who this is not for<span class="dot">.</span></h2>
       <ul class="nots">
         <li><span class="no">Not for</span> people who want cheap one-off posts.</li>
         <li><span class="no">Not for</span> owners who won’t give us access to their numbers.</li>
@@ -519,10 +528,10 @@ svg { display: block; }
     </div>
   </section>
 
-  <section id="fit" class="sec" aria-labelledby="fit-h">
+  <section id="fit" class="sec on-white" aria-labelledby="fit-h">
     <div class="wrap fit-grid">
       <div class="fit-intro">
-        <h2 id="fit-h" class="h2">See if we’re a fit.</h2>
+        <h2 id="fit-h" class="h2">See if we’re a fit<span class="dot">.</span></h2>
         <p class="body">Tap your answers. If it makes sense for both of us, you pick a time right after.</p>
       </div>
       <div class="fit-main">
@@ -541,7 +550,7 @@ svg { display: block; }
 
 </main>
 
-<footer class="foot">
+<footer class="foot on-black">
   <div class="wrap">
     <div>
       <p class="foot-name">Spade Ace</p>
@@ -814,7 +823,7 @@ svg { display: block; }
       field('whatsapp', 'WhatsApp number', { type: 'tel', inputmode: 'tel', autocomplete: 'tel', enterkeyhint: 'next', maxlength: '20', placeholder: '98765 43210' }),
       field('email', 'Email', { type: 'email', inputmode: 'email', autocomplete: 'email', autocapitalize: 'none', enterkeyhint: 'send', maxlength: '120', placeholder: 'you@yourbusiness.com' }),
       h('div', { class: 'hp', 'aria-hidden': 'true' }, h('label', { for: 'f-trap', text: 'Leave this empty' }), h('input', { id: 'f-trap', name: 'company_site_check', type: 'text', tabindex: '-1', autocomplete: 'off' })),
-      h('button', { type: 'submit', class: 'btn btn--ink btn--block', text: 'Send my answers' }),
+      h('button', { type: 'submit', class: 'btn btn--crimson btn--block', text: 'Send my answers' }),
       h('p', { class: 'fine', text: 'We use your details only to get back to you.' }));
     f.addEventListener('submit', onSubmit);
     return f;
@@ -870,10 +879,10 @@ svg { display: block; }
     const c = S.contact;
     const contactEl = isSet(c) ? contactNode(c) : null;
     const q = h('h3', { class: 't3', id: 'q-title', tabindex: '-1', text: `Thanks, ${firstName()}. We’re not the right fit.` });
-    const card = h('div', { class: 'card card--result deal', role: 'group', 'aria-label': 'Result' },
+    const card = h('div', { class: 'card card--result card--quiet deal', role: 'group', 'aria-label': 'Result' },
       h('div', { class: 'card-top' }, spade('big-spade')),
       q,
-      h('p', { text: 'We build growth systems and take a stake in the outcome. That is the wrong tool for posts or designs on their own. A good freelancer or design studio will serve you better, and cost you less.' }),
+      h('p', { text: 'We build growth systems and tie our reward to the results. That is the wrong tool for posts or designs on their own. A good freelancer or design studio will serve you better, and cost you less.' }),
       contactEl ? h('p', {}, 'If we have this wrong, write to us at ', contactEl, '.') : null);
     dir = 1;
     mountCard(card, q, true);
@@ -966,7 +975,7 @@ svg { display: block; }
         };
       })(window, target.origin + '/embed/embed.js', 'init');
 
-      const brand = { 'cal-brand': '#ffc800', 'cal-brand-emphasis': '#ffd84a', 'cal-brand-text': '#0a0a0a' };
+      const brand = { 'cal-brand': '#dc143c', 'cal-brand-emphasis': '#b80f30', 'cal-brand-text': '#ffffff' };
       window.Cal('init', { origin: target.origin });
       window.Cal('inline', {
         elementOrSelector: '#cal-inline',
