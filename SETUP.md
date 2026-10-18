@@ -9,6 +9,7 @@ You do not need to code. Words that sound technical are explained the first time
 | `site/index.html` | Your whole website. One file. This is what you put online. |
 | `apps-script/Code.gs` | A small program that lives inside your Google Sheet. It adds one new row for every person who finishes the form. |
 | `apps-script/CHROME-TASK.md` | The exact job list Claude follows to set up the Google Sheet through your Chrome. |
+| `cal-com/CAL-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up your Cal.com booking page. |
 | `SETUP.md` | This guide. |
 
 ## The colours
@@ -24,7 +25,7 @@ A **placeholder** is a stand-in written in square brackets, like `[CAL_LINK]`. I
 | Placeholder | What goes there | Who fills it in |
 | --- | --- | --- |
 | `[SHEET_WEBAPP_URL]` | The long web address Google gives for your sheet script. It ends in `/exec`. | **Claude**, as the last step of Part A |
-| `[CAL_LINK]` | Your Cal.com booking link. The full link or just the end of it both work, for example `rohan/30min` or `https://cal.com/rohan/30min`. | You tell Claude, or Claude reads it from your Cal.com account |
+| `[CAL_LINK]` | Your Cal.com booking link. The full link or just the end of it both work, for example `spadeace/fit-call` or `https://cal.com/spadeace/fit-call`. | Comes out of the Cal.com setup (see Part A2). You send Claude the report it produces |
 | `[CONTACT_WHATSAPP_OR_EMAIL]` | The WhatsApp number (with country code) or email shown in the footer and in the "not the right fit" message, for example `+91 98765 43210` or `hello@yourdomain.com`. | You tell Claude |
 
 A WhatsApp number becomes a tap-to-chat link automatically. An email becomes a tap-to-email link.
@@ -65,6 +66,14 @@ Claude creates the sheet, adds the script, publishes it and puts the address int
 | Booked Call | Blank. You fill it in |
 
 Tip for **Booked Call**: the page fills the visitor's name and email into your Cal.com booking form for them, so the email on the Cal.com booking usually matches the email in the sheet. Use it to match people.
+
+---
+
+## Part A2: Cal.com (Claude in Chrome does this part)
+
+The calendar on the page needs a Cal.com event set up the way the page expects: a "Growth fit call" with your hours, a 4-hour minimum notice so you can read each lead's answers first, and two booking questions (Business name and WhatsApp number) that the page fills in for the visitor so nobody retypes them. The ready-to-paste job for Claude in Chrome is in `cal-com/CAL-SETUP-PROMPT.md`. It ends with a short message starting `CAL SETUP REPORT`. Send that report to Claude Code and Claude puts the link into the page and re-tests it.
+
+**Status: not done yet.**
 
 ---
 

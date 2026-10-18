@@ -980,7 +980,8 @@ svg { display: block; }
       window.Cal('inline', {
         elementOrSelector: '#cal-inline',
         calLink: target.path,
-        config: { layout: 'month_view', theme: 'dark', name: answers.name, email: answers.email },
+        // business and whatsapp fill the booking questions that have those exact identifiers in Cal.com
+        config: { layout: 'month_view', theme: 'dark', name: answers.name, email: answers.email, business: answers.business, whatsapp: answers.whatsapp },
       });
       window.Cal('ui', { theme: 'dark', hideEventTypeDetails: false, layout: 'month_view', cssVarsPerTheme: { dark: brand, light: brand } });
     } catch (e) { calFallback(box, say, target); return; }
