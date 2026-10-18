@@ -6,9 +6,9 @@ One-page website for Spade Ace, a growth consultancy in Dombivli, India. Its job
 | --- | --- |
 | `site/index.html` | The website. A single file with its own CSS and JavaScript. Drag the `site` folder onto Netlify Drop to publish it. |
 | `apps-script/Code.gs` | Google Apps Script that saves each form submission as a row in a Google Sheet. |
-| `apps-script/CHROME-TASK.md` | The Google Sheet job for Claude to run through Chrome (status: not done yet). |
-| `apps-script/SHEET-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet (status: not run yet). |
-| `cal-com/CAL-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Cal.com booking page (status: not run yet). |
+| `apps-script/CHROME-TASK.md` | The Google Sheet job for Claude to run through Chrome (status: done). |
+| `apps-script/SHEET-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet (status: done). |
+| `cal-com/CAL-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Cal.com booking page (status: done). |
 | `SETUP.md` | Plain-words guide: the three placeholders, the Google Sheet (Claude sets it up), going live on Netlify, and connecting a domain. |
 
 Start with `SETUP.md`.

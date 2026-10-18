@@ -1,6 +1,6 @@
 # Google Sheet setup prompt (for Claude in Chrome)
 
-**Status: not run yet.** The session that built the website could not reach the owner's browser.
+**Status: run and completed on 18 October 2026.** Kept so the job can be repeated if it is ever needed.
 
 **How to use it:** paste everything inside the box below into Claude in Chrome (Cowork), with Chrome open and signed in to the right Google account. It sets up the sheet, publishes the script, tests the exact route the website uses, and ends with a message starting `SHEET SETUP REPORT`. Send that report back to Claude Code. Claude then puts the address into the website and re-tests it.
 

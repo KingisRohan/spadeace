@@ -25,9 +25,9 @@ A **placeholder** is a stand-in written in square brackets, like `[CAL_LINK]`. I
 
 | Placeholder | What goes there | Who fills it in |
 | --- | --- | --- |
-| `[SHEET_WEBAPP_URL]` | The long web address Google gives for your sheet script. It ends in `/exec`. | **Claude**, as the last step of Part A |
-| `[CAL_LINK]` | Your Cal.com booking link. The full link or just the end of it both work, for example `spadeace/fit-call` or `https://cal.com/spadeace/fit-call`. | Comes out of the Cal.com setup (see Part A2). You send Claude the report it produces |
-| `[CONTACT_WHATSAPP_OR_EMAIL]` | The WhatsApp number (with country code) or email shown in the footer and in the "not the right fit" message, for example `+91 98765 43210` or `hello@yourdomain.com`. | You tell Claude |
+| `[SHEET_WEBAPP_URL]` | The long web address Google gives for your sheet script. It ends in `/exec`. | **Done.** Claude filled it in (Part A) |
+| `[CAL_LINK]` | Your Cal.com booking link. | **Done.** It is `spadeace/fit-call` (Part A2) |
+| `[CONTACT_WHATSAPP_OR_EMAIL]` | The WhatsApp number (with country code) or email shown in the footer and in the "not the right fit" message, for example `+91 98765 43210` or `hello@yourdomain.com`. | **You, the only one left.** Tell Claude the number or email |
 
 A WhatsApp number becomes a tap-to-chat link automatically. An email becomes a tap-to-email link.
 
@@ -44,16 +44,19 @@ Some words first:
 - **Deploy** means "publish this program so your website can talk to it".
 - A **web app** is a program that has its own web address. Your website sends each new lead to that address.
 
-Claude creates the sheet, adds the script, publishes it and puts the address into the page, working in your Chrome. You do not do any of it. The exact job list is in `apps-script/CHROME-TASK.md`, and `apps-script/SHEET-SETUP-PROMPT.md` is the same job as a ready-to-paste prompt for Claude in Chrome. It ends with a short message starting `SHEET SETUP REPORT`: send that to Claude Code and Claude puts the address into the page and re-tests it.
+Claude created the sheet, added the script, published it and put the address into the page, working in your Chrome. You did not have to do any of it.
 
-**Status: not done yet.** The session that built the page could not reach your Chrome, so this part has not been run, and nothing has been faked. Until it is done, `[SHEET_WEBAPP_URL]` stays a placeholder and the page does not save leads. The job runs as soon as Claude is working on your computer with the Chrome extension on.
+**Status: done on 18 October 2026.**
 
-**What "done" looks like**
-- A Google Sheet called `Spade Ace Leads` in your Google account, with a `Leads` tab and the 14 headings in row 1.
-- The script published as a web app that runs as you and that **anyone** can send data to (visitors never need a Google login).
-- Opening the web app address in a browser shows "Spade Ace lead capture is live".
-- A test lead sent to that address adds one correct row, which is then deleted.
-- The address is pasted into `index.html` in place of `[SHEET_WEBAPP_URL]`.
+**What was set up**
+- A Google Sheet called `Spade Ace Leads` in your Google account, with a `Leads` tab and the 14 headings in row 1 (bold and frozen).
+- The script from `apps-script/Code.gs`, attached to that sheet and published as a web app named `Spade Ace leads` (Version 1). It runs as you, and **anyone** can send data to it, so visitors never need a Google login.
+- A test lead sent from an outside website, as an anonymous visitor, added one correct row (Lead Tag EARLY, Awareness Level LOW). The test rows were then deleted, and the sheet now holds only the headings.
+- The web app address is in `index.html` in place of `[SHEET_WEBAPP_URL]`.
+
+**If the script ever changes:** the published version does not update by itself. Claude publishes a new version (Deploy, Manage deployments, New version). The address stays the same.
+
+The job list Claude followed is in `apps-script/CHROME-TASK.md`, and `apps-script/SHEET-SETUP-PROMPT.md` is the same job as a ready-to-paste prompt, in case it ever has to be redone.
 
 ### What each column in the sheet means
 
@@ -72,9 +75,21 @@ Tip for **Booked Call**: the page fills the visitor's name and email into your C
 
 ## Part A2: Cal.com (Claude in Chrome does this part)
 
-The calendar on the page needs a Cal.com event set up the way the page expects: a "Growth fit call" with your hours, a 4-hour minimum notice so you can read each lead's answers first, and two booking questions (Business name and WhatsApp number) that the page fills in for the visitor so nobody retypes them. The ready-to-paste job for Claude in Chrome is in `cal-com/CAL-SETUP-PROMPT.md`. It ends with a short message starting `CAL SETUP REPORT`. Send that report to Claude Code and Claude puts the link into the page and re-tests it.
+Claude in Chrome set up your Cal.com booking page from `cal-com/CAL-SETUP-PROMPT.md`.
 
-**Status: not done yet.**
+**Status: done on 18 October 2026.** The public page is `https://cal.com/spadeace/fit-call`, and the website uses `spadeace/fit-call`.
+
+**What was set up**
+- A **Growth fit call**: 30 minutes, on Google Meet, with your Google Calendar connected so it never double-books you and adds each booking to it.
+- **Your hours:** Monday to Saturday, 08:00 to 09:00 and 18:00 to 21:00 IST. Sunday off. This is its own schedule, "Spade Ace calls", so your other availability is untouched.
+- **Limits:** at least 4 hours' notice (time to read each lead's answers first), a 10 minute buffer after each call, at most 4 bookings a day, bookable up to 30 days ahead.
+- **Booking questions:** Name, Email, Business name and WhatsApp number (all required), plus an optional "Anything we should know before the call?". The page fills in the first four for the visitor.
+- **Calendar entry name:** "Fit call: {visitor} ({business})", so you can see who is on each call at a glance.
+- **Reminder:** an email to the visitor 1 hour before the call.
+- The sample event types Cal.com starts you with are hidden. Nothing was deleted.
+- A pre-fill test passed: opening the booking page with a name, email, business and WhatsApp number filled all four fields. No real booking was made.
+
+**Good to know about the buffer:** with a 10 minute buffer, booking 08:00 hides the 08:30 slot. So you get at most 1 morning call and 3 evening calls a day, which matches the cap of 4. If you would rather offer more slots, ask Claude to set the buffer to 0 and raise the daily cap.
 
 ---
 

@@ -1,6 +1,6 @@
 # Cal.com setup prompt (for Claude in Chrome)
 
-**Status: not run yet.** The session that built the website could not reach the owner's browser.
+**Status: run and completed on 18 October 2026.** Kept so the job can be repeated if it is ever needed.
 
 **How to use it:** paste everything inside the box below into Claude in Chrome (Cowork), with Chrome open. It asks 4 short questions, sets up Cal.com, checks its own work, and ends with a message that starts `CAL SETUP REPORT`. Send that report back to Claude Code. Claude then puts the booking link into the website and re-tests it.
 

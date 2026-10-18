@@ -1,6 +1,6 @@
 # Google Sheet job for Claude in Chrome
 
-**Status: NOT DONE.** The cloud session that built this page had no Chrome extension connected, so none of the steps below has been run. Nothing was faked: `[SHEET_WEBAPP_URL]` in `site/index.html` is still a placeholder and leads are not being saved yet.
+**Status: DONE on 18 October 2026.** The job was run through Claude in Chrome using `apps-script/SHEET-SETUP-PROMPT.md`, and the web app address is now in `site/index.html`. The steps below are kept so the job can be repeated if it is ever needed.
 
 **Paste-ready version:** `apps-script/SHEET-SETUP-PROMPT.md` is the same job written as a self-contained prompt for Claude in Chrome (Cowork), with the script embedded. It ends in a `SHEET SETUP REPORT` to send back to Claude Code.
 
