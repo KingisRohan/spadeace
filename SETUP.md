@@ -7,6 +7,7 @@ You do not need to code. Words that sound technical are explained the first time
 | File | What it is |
 | --- | --- |
 | `site/index.html` | Your whole website. One file. This is what you put online. |
+| `brand/` | Your logo as sharp vector files (red, and white for dark backgrounds) and a square PNG ready to upload as a profile picture. |
 | `apps-script/Code.gs` | A small program that lives inside your Google Sheet. It adds one new row for every person who finishes the form. |
 | `apps-script/CHROME-TASK.md` | The exact job list Claude follows to set up the Google Sheet through your Chrome. |
 | `apps-script/SHEET-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet and publishes the script. |
@@ -15,7 +16,11 @@ You do not need to code. Words that sound technical are explained the first time
 
 ## The colours
 
-White is the background. Crimson (`#DC143C`) is the highlight. Black is the supporting colour: the type, the black playing card the form is dealt on, the "who this is not for" band and the footer. The colours are defined once, at the top of the style section of `index.html` (search for `--crimson`).
+White is the background. The red of your logo (`#93030F`) is the highlight. Black is the supporting colour: the type, the thick rules, the black playing card the form is dealt on, the "who this is not for" band and the footer. The colours are defined once, at the top of the style section of `index.html` (search for `--red`).
+
+**The logo.** Your logo is drawn into the page as a vector (a shape made of curves, not a picture), so it stays sharp on every screen and costs almost nothing to load. It appears at the top, as the centre of the white Ace card a fit is dealt, as the browser-tab icon, and large and white at the bottom of the footer. It is defined once, near the top of the `<body>` in `index.html` (search for `symbol id="logo"`).
+
+**The type.** Big statements are set in Abril Fatface, a heavy 19th-century advertising face (the same era and print world as playing cards). Everything you read or tap is Archivo. Both load free from Google Fonts.
 
 ---
 
@@ -33,7 +38,7 @@ A WhatsApp number becomes a tap-to-chat link automatically. An email becomes a t
 
 If you ever edit the file by hand, use Notepad or TextEdit (Format, then Make Plain Text), never Word or Google Docs, which change the quote marks and break the page. Replace only the text between the quote marks and keep the quote marks and commas.
 
-While any of the three still has square brackets, the page shows a **crimson setup bar** at the top listing what is missing. It disappears by itself once all three are filled. This is on purpose, so the page cannot go live with a blank by accident.
+While any of the three still has square brackets, the page shows a **red setup bar** at the top listing what is missing. It disappears by itself once all three are filled. This is on purpose, so the page cannot go live with a blank by accident.
 
 ---
 
@@ -148,7 +153,7 @@ Do this on the live address, on your phone.
 
 | What you see | What to do |
 | --- | --- |
-| A crimson bar at the top of the page | One of the three settings still has square brackets. See "The 3 placeholders" |
+| A red bar at the top of the page | One of the three settings still has square brackets. See "The 3 placeholders" |
 | Test submissions never reach the sheet | Tell Claude. Claude checks the web app address ends in `/exec`, opens it to confirm the "lead capture is live" message, confirms access is set to **Anyone**, checks the script has been re-published after any edit, and reads the error list under **Executions** in Apps Script |
 | The calendar does not show | Check `[CAL_LINK]` by opening `https://cal.com/` followed by your link in a browser. If you do not see your booking page there, fix the event in Cal.com. After about 10 seconds without a calendar, visitors automatically get a plain "Open the booking page" link instead of an error |
 | Someone tells you the form "did nothing" | The visitor never sees an error by design. Saving happens quietly in the background. Check the sheet. If the visitor's phone had no signal, the page keeps their answers and sends them the next time they open the page |
@@ -161,5 +166,5 @@ Do this on the live address, on your phone.
 - **The rules live in one place.** All the logic (who is NOT_FIT, PRIORITY, EARLY, STANDARD, and the awareness levels) sits in one block in `index.html` headed `THE RULES`. The sheet script only records what the page sends. If you ever want a rule changed, change it there only.
 - **Spam.** Anyone who views your page's source can find the sheet address. The page has a hidden trap for basic bots, and the script ignores anything without a name and a way to contact the person. If junk rows ever appear, tell Claude and a lock can be added.
 - **Privacy.** You are collecting names, phone numbers and emails. India's data protection law (the DPDP Act, 2023) expects businesses to be clear about what they collect and why. The form says "We use your details only to get back to you." You may want a short privacy page later. This guide is not legal advice, so ask a lawyer if you are unsure.
-- **Speed.** The page is one file of about 43 KB plus two small Google Fonts files. The Cal.com calendar only loads after someone finishes the form, so it never slows the first visit.
+- **Speed.** The page is one file of about 49 KB plus two small Google Fonts files (about 70 KB together). The Cal.com calendar only loads after someone finishes the form, so it never slows the first visit.
 - **Real results.** The Proof section describes the two engagements without any numbers, because none were provided. If you have a real, checkable result for either one, add it as one more sentence. The spot is marked with a comment in `index.html` (search for `OPTIONAL`).

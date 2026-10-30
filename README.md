@@ -5,6 +5,7 @@ One-page website for Spade Ace, a growth consultancy in Dombivli, India. Its job
 | Path | What it is |
 | --- | --- |
 | `site/index.html` | The website. A single file with its own CSS and JavaScript. Drag the `site` folder onto Netlify Drop to publish it. |
+| `brand/` | Your logo as sharp vector files (`spade-ace-logo.svg` in red, `spade-ace-logo-white.svg` for dark backgrounds) and a square PNG (`spade-ace-logo-1024.png`) ready to upload as a profile picture. |
 | `apps-script/Code.gs` | Google Apps Script that saves each form submission as a row in a Google Sheet. |
 | `apps-script/CHROME-TASK.md` | The Google Sheet job for Claude to run through Chrome (status: done). |
 | `apps-script/SHEET-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet (status: done). |
