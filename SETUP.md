@@ -11,6 +11,7 @@ You do not need to code. Words that sound technical are explained the first time
 | `apps-script/Code.gs` | A small program that lives inside your Google Sheet. It adds one new row for every person who finishes the form. |
 | `apps-script/CHROME-TASK.md` | The exact job list Claude follows to set up the Google Sheet through your Chrome. |
 | `apps-script/SHEET-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet and publishes the script. |
+| `live-test/LIVE-TEST-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that tests your live site end to end with two fake leads (a fit and a not-fit), checks both rows in your Google Sheet, and deletes only those two test rows. |
 | `netlify/NETLIFY-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that puts the site live on Netlify, and (second box) later connects your own domain. |
 | `netlify.toml` | A three-line note that tells Netlify to publish the `site` folder. |
 | `cal-com/CAL-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up your Cal.com booking page. |
@@ -152,10 +153,11 @@ The exact names of buttons in Netlify and at registrars change from time to time
 
 ---
 
-## Test it properly before you share the link (5 minutes)
+## Test it properly before you share the link
 
-Do this on the live address, on your phone.
+**Recommended: let Claude do it.** `live-test/LIVE-TEST-PROMPT.md` is a ready-to-paste prompt for Claude in Chrome. It fills in your live form twice with obviously fake details, checks what the site shows, checks that both leads land in your Google Sheet with the right values in all 14 columns, and then deletes only those two test rows. It never books a call. Run it once the site is live, and send the `LIVE TEST REPORT` it ends with back to Claude Code.
 
+**Or do it yourself (5 minutes).** Do this on the live address, on your phone.
 1. Open the page. Tap **See if we're a fit** and answer the questions with made-up details but **your own email**.
    - Try answering **"I just need posts or designs made"** for question 4. You should see the polite "not the right fit" message and **no calendar**.
    - Try again with any other answer. You should see **"Got it"** and the Cal.com calendar.

@@ -10,6 +10,7 @@ One-page website for Spade Ace, a growth consultancy in Dombivli, India. Its job
 | `apps-script/CHROME-TASK.md` | The Google Sheet job for Claude to run through Chrome (status: done). |
 | `apps-script/SHEET-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet (status: done). |
 | `cal-com/CAL-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that sets up the Cal.com booking page (status: done). |
+| `live-test/LIVE-TEST-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that tests the live site end to end with two fake leads, checks both rows in the Google Sheet, then deletes only those two rows (status: ready, run it once the site is live). |
 | `netlify/NETLIFY-SETUP-PROMPT.md` | Ready-to-paste prompt for Claude in Chrome that puts the site live on Netlify from GitHub (status: ready, not yet run). A second box connects your own domain later. |
 | `netlify.toml` | Tells Netlify to publish the `site` folder with no build step. |
 | `SETUP.md` | Plain-words guide: the three placeholders, the Google Sheet (Claude sets it up), going live on Netlify, and connecting a domain. |
