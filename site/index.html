@@ -18,7 +18,7 @@ window.SPADE_ACE_SETTINGS = {
   calLink: 'spadeace/fit-call',
 
   // 3. The WhatsApp number (with country code) or email shown in the footer.
-  contact: '[CONTACT_WHATSAPP_OR_EMAIL]'
+  contact: '+91 90041 53750'
 };
 </script>
 
@@ -378,7 +378,7 @@ h1, h2, h3 { font-family: var(--disp); font-weight: 400; font-synthesis: none; l
 .card--result .t3 { margin-top: 20px; }
 .card--result .t3 + p { margin-top: 14px; color: var(--muted); }
 .card--result p + p { margin-top: 12px; }
-.card--result a { font-weight: 700; color: #fff; text-decoration: underline; text-decoration-color: #fff; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.card--result a { font-weight: 700; color: #fff; text-decoration: underline; text-decoration-color: #fff; text-decoration-thickness: 2px; text-underline-offset: 3px; white-space: nowrap; }
 .big-spade { width: 56px; height: 64px; fill: #fff; }
 
 .card--ace {
@@ -416,7 +416,7 @@ h1, h2, h3 { font-family: var(--disp); font-weight: 400; font-synthesis: none; l
 .foot-name { font-family: var(--disp); font-size: clamp(1.9rem, 6vw, 2.5rem); line-height: 1; }
 .foot p + p { margin-top: 6px; }
 .foot .small { color: var(--muted); }
-.foot a { text-underline-offset: 3px; }
+.foot a { text-underline-offset: 3px; white-space: nowrap; }   /* a phone number never splits across two lines */
 .foot .fine { margin-top: 22px; }
 .foot-crop { --m: min(86vw, 620px); height: calc(var(--m) * .92); margin-top: clamp(44px, 7vw, 76px); display: flex; justify-content: center; overflow: hidden; }
 .foot-mark { flex: none; width: var(--m); height: calc(var(--m) * 1.147); fill: #fff; }

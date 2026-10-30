@@ -34,7 +34,7 @@ A **placeholder** is a stand-in written in square brackets, like `[CAL_LINK]`. I
 | --- | --- | --- |
 | `[SHEET_WEBAPP_URL]` | The long web address Google gives for your sheet script. It ends in `/exec`. | **Done.** Claude filled it in (Part A) |
 | `[CAL_LINK]` | Your Cal.com booking link. | **Done.** It is `spadeace/fit-call` (Part A2) |
-| `[CONTACT_WHATSAPP_OR_EMAIL]` | The WhatsApp number (with country code) or email shown in the footer and in the "not the right fit" message, for example `+91 98765 43210` or `hello@yourdomain.com`. | **You, the only one left.** Tell Claude the number or email |
+| `[CONTACT_WHATSAPP_OR_EMAIL]` | The WhatsApp number (with country code) or email shown in the footer and in the "not the right fit" message, for example `+91 98765 43210` or `hello@yourdomain.com`. | **Done.** Your WhatsApp number is filled in, as a tap-to-chat link |
 
 A WhatsApp number becomes a tap-to-chat link automatically. An email becomes a tap-to-email link.
 
@@ -107,7 +107,7 @@ Claude in Chrome set up your Cal.com booking page from `cal-com/CAL-SETUP-PROMPT
 **Recommended: let Claude do it.** `netlify/NETLIFY-SETUP-PROMPT.md` is a ready-to-paste prompt for Claude in Chrome. It connects Netlify to your GitHub repository, publishes the `site` folder, checks the live page, and reports back. Nothing to drag, and no files on your computer. From then on, every change Claude Code makes to the site goes live by itself within a minute or so. The file `netlify.toml` in the project tells Netlify which folder to publish.
 
 Three things to know first:
-- **The footer contact must be filled in first.** The prompt refuses to publish while the footer still shows `[CONTACT_WHATSAPP_OR_EMAIL]`.
+- **The footer contact is already filled in** (your WhatsApp number, as a tap-to-chat link). The prompt still checks, and refuses to publish if it ever finds a placeholder.
 - **The branch.** Right now the finished site lives on the branch `claude/spade-ace-website-e995ek`; the `main` branch has only a README. So Netlify publishes that branch. Once the site is merged into `main`, ask Claude Code to switch Netlify to `main`.
 - **Netlify's free plan now counts usage in "credits".** Netlify's public forum has 2026 reports of free sites having deploys paused. The prompt checks for this and reports what it sees. It never pays or upgrades. If your site is ever paused, tell Claude Code: the site is one file and can be hosted for free somewhere else.
 

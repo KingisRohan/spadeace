@@ -1,11 +1,11 @@
 # Netlify setup prompt (for Claude in Chrome)
 
-**Status: ready to run, but not yet run.** Run it only after the footer contact is filled in (see "Before you run it").
+**Status: ready to run, but not yet run.** The footer contact is filled in, so nothing blocks it.
 
 **What it does:** puts the website live on a free `.netlify.app` address, straight from the GitHub repository. Nothing to drag, no files on your computer. From then on, every change Claude Code pushes to the branch goes live by itself.
 
 **Before you run it**
-1. Tell Claude Code the WhatsApp number (with country code) or the email address that should show in the footer. Claude Code puts it in the page and pushes it. The prompt below refuses to publish while the footer still shows `[CONTACT_WHATSAPP_OR_EMAIL]`.
+1. The footer contact is already filled in (your WhatsApp number). The prompt below still checks the page first, and stops if it ever finds a placeholder like `[CONTACT_WHATSAPP_OR_EMAIL]`.
 2. Use the Chrome that is signed in to your GitHub account. The prompt asks you to sign in to Netlify if you are not.
 
 **How to use it:** paste everything inside the first box into Claude in Chrome (Cowork), with Chrome open. It asks 2 short questions, sets up Netlify, checks the live page, and ends with a message that starts `NETLIFY SETUP REPORT`. Send that report back to Claude Code.
