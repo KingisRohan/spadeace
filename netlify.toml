@@ -1,0 +1,4 @@
+# Netlify reads this file. It says: publish the "site" folder exactly as it is.
+# There is no build step, because site/index.html is already the finished page.
+[build]
+  publish = "site"

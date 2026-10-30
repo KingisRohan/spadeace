@@ -11,6 +11,8 @@ You do not need to code. Words that sound technical are explained the first time
 | `apps-script/Code.gs` | A small program that lives inside your Google Sheet. It adds one new row for every person who finishes the form. |
 | `apps-script/CHROME-TASK.md` | The exact job list Claude follows to set up the Google Sheet through your Chrome. |
 | `apps-script/SHEET-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet and publishes the script. |
+| `netlify/NETLIFY-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that puts the site live on Netlify, and (second box) later connects your own domain. |
+| `netlify.toml` | A three-line note that tells Netlify to publish the `site` folder. |
 | `cal-com/CAL-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up your Cal.com booking page. |
 | `SETUP.md` | This guide. |
 
@@ -98,9 +100,20 @@ Claude in Chrome set up your Cal.com booking page from `cal-com/CAL-SETUP-PROMPT
 
 ---
 
-## Part B: Put the site online for free with Netlify Drop
+## Part B: Put the site online for free with Netlify
 
-**Netlify** is a free hosting company. **Netlify Drop** lets you publish a website by dragging a folder onto a web page. No coding, no command line.
+**Netlify** is a free hosting company. It keeps your website on its computers so anyone can open it by typing an address.
+
+**Recommended: let Claude do it.** `netlify/NETLIFY-SETUP-PROMPT.md` is a ready-to-paste prompt for Claude in Chrome. It connects Netlify to your GitHub repository, publishes the `site` folder, checks the live page, and reports back. Nothing to drag, and no files on your computer. From then on, every change Claude Code makes to the site goes live by itself within a minute or so. The file `netlify.toml` in the project tells Netlify which folder to publish.
+
+Three things to know first:
+- **The footer contact must be filled in first.** The prompt refuses to publish while the footer still shows `[CONTACT_WHATSAPP_OR_EMAIL]`.
+- **The branch.** Right now the finished site lives on the branch `claude/spade-ace-website-e995ek`; the `main` branch has only a README. So Netlify publishes that branch. Once the site is merged into `main`, ask Claude Code to switch Netlify to `main`.
+- **Netlify's free plan now counts usage in "credits".** Netlify's public forum has 2026 reports of free sites having deploys paused. The prompt checks for this and reports what it sees. It never pays or upgrades. If your site is ever paused, tell Claude Code: the site is one file and can be hosted for free somewhere else.
+
+### Or do it yourself with Netlify Drop
+
+**Netlify Drop** lets you publish a website by dragging a folder onto a web page. No coding, no command line.
 
 1. Create a free account first at [netlify.com](https://www.netlify.com) (Sign up) and stay logged in. Why: a site dropped without an account is temporary and is deleted after a short time (about an hour). A site dropped while logged in stays.
 2. On your computer, make a new folder called `spade-ace-site`. Put your finished `index.html` inside it. The file must be named exactly `index.html`.
@@ -110,11 +123,13 @@ Claude in Chrome set up your Cal.com booking page from `cal-com/CAL-SETUP-PROMPT
 6. Give it a friendlier address: in Netlify open your project, then **Project configuration** (called Site configuration in older screens), then **Change project name**. Choose something like `spadeace`, giving `spadeace.netlify.app`.
 7. **Test the real thing** (see the checklist below) on that live address.
 
-**To update the site later:** edit `index.html`, then in Netlify open the project, click **Deploys**, and drag the folder onto the drop box on that page. The address stays the same.
+**To update a Drop site later:** edit `index.html`, then in Netlify open the project, click **Deploys**, and drag the folder onto the drop box on that page. The address stays the same. (A site made with the prompt above updates by itself instead.)
 
 ---
 
 ## Part C: Connect your own domain later (for example spadeace.in)
+
+**Recommended: let Claude do it.** The second box in `netlify/NETLIFY-SETUP-PROMPT.md` is a prompt for Claude in Chrome that adds the domain in Netlify and adds the two records at your registrar without touching your email records. You still buy the domain yourself. The manual steps are below.
 
 Some words first:
 - A **domain** is your web name, like `spadeace.in`. You rent it for a yearly fee from a **registrar** (GoDaddy, Namecheap, BigRock, Hostinger and others).
