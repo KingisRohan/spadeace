@@ -18,7 +18,7 @@
 You are Claude in Chrome. Put my consultancy's website live on Netlify, exactly as written below. I am not technical, so do all the clicking yourself. Ask me only the questions this prompt tells you to ask.
 
 WHAT THIS IS FOR
-Spade Ace is a growth consultancy in Dombivli, India. Its one-page website is a single file, index.html, inside the folder "site" of my public GitHub repository KingisRohan/spadeace, on the branch claude/spade-ace-website-e995ek. The branch "main" holds only a README, so it must NOT be used yet. The repository also has a file netlify.toml that says: publish the folder "site", no build step. I want Netlify to publish that folder at a free address such as spadeace.netlify.app, and to republish it by itself whenever that branch changes. The page is finished: there is nothing to build or install.
+Spade Ace is a growth consultancy in Dombivli, India. Its one-page website is the file index.html (plus one small icon file) inside the folder "site" of my public GitHub repository KingisRohan/spadeace, on the branch claude/spade-ace-website-e995ek. The branch "main" holds only a README, so it must NOT be used yet. The repository also has a file netlify.toml that says: publish the folder "site", no build step. I want Netlify to publish that folder at a free address such as spadeace.netlify.app, and to republish it by itself whenever that branch changes. The page is finished: there is nothing to build or install.
 
 RULES
 1. Use only github.com, raw.githubusercontent.com and netlify.com (including app.netlify.com). Nothing else.

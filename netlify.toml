@@ -2,3 +2,14 @@
 # There is no build step, because site/index.html is already the finished page.
 [build]
   publish = "site"
+
+# Small safety instructions that Netlify sends along with every page.
+# 1. Other websites may not show your page inside a frame of their own (a known trick for stealing form entries).
+# 2. Browsers must not guess file types.
+# 3. When a visitor follows a link away from your site, only your site's address is passed on, never the full page link.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

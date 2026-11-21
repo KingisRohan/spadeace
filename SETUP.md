@@ -6,14 +6,15 @@ You do not need to code. Words that sound technical are explained the first time
 
 | File | What it is |
 | --- | --- |
-| `site/index.html` | Your whole website. One file. This is what you put online. |
-| `brand/` | Your logo as sharp vector files (red, and white for dark backgrounds) and a square PNG ready to upload as a profile picture. |
+| `site/index.html` | Your whole website, in one file. This is what you put online. Its fonts and logo are built in, so it needs nothing else to appear. |
+| `site/apple-touch-icon.png` | A small picture of your logo. An iPhone shows it when someone saves your site to their home screen. It travels with `index.html`. |
+| `brand/` | Your logo as sharp vector files (red, and white for dark backgrounds), a square PNG ready to upload as a profile picture, and `share-preview.png`, the picture WhatsApp will show when your link is shared (see "Still to switch on" below). |
 | `apps-script/Code.gs` | A small program that lives inside your Google Sheet. It adds one new row for every person who finishes the form. |
 | `apps-script/CHROME-TASK.md` | The exact job list Claude follows to set up the Google Sheet through your Chrome. |
 | `apps-script/SHEET-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up the Google Sheet and publishes the script. |
 | `live-test/LIVE-TEST-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that tests your live site end to end with two fake leads (a fit and a not-fit), checks both rows in your Google Sheet, and deletes only those two test rows. |
 | `netlify/NETLIFY-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that puts the site live on Netlify, and (second box) later connects your own domain. |
-| `netlify.toml` | A three-line note that tells Netlify to publish the `site` folder. |
+| `netlify.toml` | A short note for Netlify: publish the `site` folder, and send three small safety instructions with every page (for example, other websites may not show your page inside a frame of their own). |
 | `cal-com/CAL-SETUP-PROMPT.md` | The ready-to-paste prompt for Claude in Chrome that sets up your Cal.com booking page. |
 | `SETUP.md` | This guide. |
 
@@ -23,7 +24,9 @@ White is the background. The red of your logo (`#93030F`) is the highlight. Blac
 
 **The logo.** Your logo is drawn into the page as a vector (a shape made of curves, not a picture), so it stays sharp on every screen and costs almost nothing to load. It appears at the top, as the centre of the white Ace card a fit is dealt, as the browser-tab icon, and large and white at the bottom of the footer. It is defined once, near the top of the `<body>` in `index.html` (search for `symbol id="logo"`).
 
-**The type.** Big statements are set in Abril Fatface, a heavy 19th-century advertising face (the same era and print world as playing cards). Everything you read or tap is Archivo. Both load free from Google Fonts.
+**The type.** Big statements are set in Abril Fatface, a heavy 19th-century advertising face (the same era and print world as playing cards). Everything you read or tap is Archivo. Both are free, open-licensed typefaces, and both are built into the page itself. The page asks no other website for anything before it appears, so the text never shows in a plain font first and never jumps.
+
+**The one moving moment.** When the page opens, the arrow in your logo rises through the spade, once, in about a second. It happens again on the white Ace card that a fit is dealt. Nothing else on the page animates, and visitors who have asked their phone or computer to reduce motion see the finished logo straight away.
 
 ---
 
@@ -117,7 +120,7 @@ Three things to know first:
 **Netlify Drop** lets you publish a website by dragging a folder onto a web page. No coding, no command line.
 
 1. Create a free account first at [netlify.com](https://www.netlify.com) (Sign up) and stay logged in. Why: a site dropped without an account is temporary and is deleted after a short time (about an hour). A site dropped while logged in stays.
-2. On your computer, make a new folder called `spade-ace-site`. Put your finished `index.html` inside it. The file must be named exactly `index.html`.
+2. On your computer, make a new folder called `spade-ace-site`. Put everything from the `site` folder inside it: `index.html` and `apple-touch-icon.png`. The page file must be named exactly `index.html`.
 3. Go to [app.netlify.com/drop](https://app.netlify.com/drop) (the same page is also reachable at netlify.com/drop).
 4. Drag the **folder** (not the file) onto the box on that page. Wait a few seconds.
 5. Netlify shows a live address like `https://bright-otter-1234.netlify.app`. Open it. Your site is live.
@@ -183,5 +186,7 @@ The exact names of buttons in Netlify and at registrars change from time to time
 - **The rules live in one place.** All the logic (who is NOT_FIT, PRIORITY, EARLY, STANDARD, and the awareness levels) sits in one block in `index.html` headed `THE RULES`. The sheet script only records what the page sends. If you ever want a rule changed, change it there only.
 - **Spam.** Anyone who views your page's source can find the sheet address. The page has a hidden trap for basic bots, and the script ignores anything without a name and a way to contact the person. If junk rows ever appear, tell Claude and a lock can be added.
 - **Privacy.** You are collecting names, phone numbers and emails. India's data protection law (the DPDP Act, 2023) expects businesses to be clear about what they collect and why. The form says "We use your details only to get back to you." You may want a short privacy page later. This guide is not legal advice, so ask a lawyer if you are unsure.
-- **Speed.** The page is one file of about 49 KB plus two small Google Fonts files (about 70 KB together). The Cal.com calendar only loads after someone finishes the form, so it never slows the first visit.
+- **Speed.** The page is one file of about 100 KB, which a web server squeezes to about 53 KB on the way to the visitor. That includes both fonts and the logo. It contacts no other website while loading. The Cal.com calendar only loads after someone finishes the form, so it never slows the first visit.
+- **The call length on the page.** The line above the form says "a 30-minute call", to match your Cal.com event. If you ever change the length of the event in Cal.com, tell Claude so the page says the same.
+- **Still to switch on: the WhatsApp preview picture.** When someone shares your link on WhatsApp, a picture can appear with it. The picture is ready (`brand/share-preview.png`), but WhatsApp needs the full live address of the picture, so it can only be switched on once the site is live. Send Claude the live address and it is a two-minute job.
 - **Real results.** The Proof section describes the two engagements without any numbers, because none were provided. If you have a real, checkable result for either one, add it as one more sentence. The spot is marked with a comment in `index.html` (search for `OPTIONAL`).
